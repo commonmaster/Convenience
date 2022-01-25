@@ -12,9 +12,9 @@ public class 회원관리서비스 {
 	@Autowired
 	회원DAO 회원DAO;	
 	
-	public void 회원등록서비스(Member 새회원) {
+	public int 회원등록서비스(Member 새회원) {
 		
-		회원DAO.회원등록(새회원);
+		return 회원DAO.회원등록(새회원);
 	}
 	
 	public boolean ID사용가능확인서비스(String id) {

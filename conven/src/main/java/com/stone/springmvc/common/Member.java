@@ -65,4 +65,34 @@ public class Member {
 	public Date getRegDate() {
 		return regDate;
 	}
+	
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	@Override
+	public String toString() {
+		
+		return id + " " + password +" "+ name;
+	}
 }

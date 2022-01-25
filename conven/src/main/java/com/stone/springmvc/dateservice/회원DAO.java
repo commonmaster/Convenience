@@ -16,12 +16,14 @@ import config.DBConfig;
 @Repository
 public class 회원DAO {
 
-	public void 회원등록(Member 새회원) {
+	public int 회원등록(Member 새회원) {
 		
 		Connection conn = getConnection();		
 		PreparedStatement pstmt = null;		
 		
 		String sql = "insert into member(id, password, name, email) values(?,?,?,?)";
+		
+		int success = -1;
 		
 		try {
 			
@@ -32,7 +34,7 @@ public class 회원DAO {
 			pstmt.setString(3, 새회원.getName());
 			pstmt.setString(4, 새회원.getEmail());			
 			
-			int success = pstmt.executeUpdate();
+			success = pstmt.executeUpdate();
 			
 			if(success > 0) {
 				conn.commit();
@@ -43,6 +45,8 @@ public class 회원DAO {
 		} catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		return success;
 	
 	}
 	

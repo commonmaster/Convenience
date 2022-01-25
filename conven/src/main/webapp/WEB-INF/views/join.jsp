@@ -69,7 +69,7 @@
  </head>
  <body>
   
-  <form>
+  <form action="/join" method="post" onsubmit="return submitCheck()">
 	<table class="join_table">
 		<caption>회원가입</caption>
 		<tr><td id="caption_line" width="500px"></td></tr>
@@ -79,22 +79,22 @@
 		
 		
 		<tr><td><span class="tit">아이디</span><br>
-				<input type="text" name="id" id="id" maxlength="14" readonly="readonly">&nbsp;<input type="button" value="중복검사" onclick="openIdDuplecation()" id="duple_btn"><br>
+				<input type="text" name="id" id="id" maxlength="14" readonly="readonly" placeholder="중복 검사를 실행하세요" value="${id}">&nbsp;<input type="button" value="중복검사" onclick="openIdDuplecation()" id="duple_btn"><br>
 				<span id="id_message" class="message"></span>
 			</td>
 		</tr>
 		<tr><td><span class="tit">비밀번호</span><br>
-				<input type="password" name="password" id="password" maxlength="14" onblur="password_check(this)"><br>
+				<input type="password" name="password" id="password" maxlength="14" onblur="password_check(this)" placeholder="최대  14자"><br>
 				<span id="password_message" class="message"></span>
 			</td>
 		</tr>
 		<tr><td><span class="tit">비밀번호확인</span><br>
-				<input type="password" name="password2" id="password2" maxlength="14" onblur="password2_check(this)"><br>
+				<input type="password" name="password2" id="password2" maxlength="14" onblur="password2_check(this)" placeholder="최대  14자"><br>
 				<span id="password2_message" class="message"></span>
 			</td>
 		</tr>
 		<tr><td><span class="tit">이름</span><br>
-				<input type="text" name="name" id="name" maxlength="14" onblur="name_check(this)"><br>
+				<input type="text" name="name" id="name" maxlength="20" onblur="name_check(this)" placeholder="최대  20자"><br>
 				<span id="name_message" class="message"></span>
 			</td>
 		</tr>
@@ -105,10 +105,7 @@
 		</tr>
 		<tr>
 			<td align="center"><input type="submit" id="submit_btn" value="가 입"></td>
-		<tr>				
-		
-		
-		
+		<tr>	
 	</table>
   </form>
   
@@ -125,11 +122,16 @@ function idGet(value){
 	
 	var ele = document.getElementById("id");
 	ele.value = value;
+	correctInputID = true;
 }
 
 function openIdDuplecation(){
-	
+		
 	var win = window.open("/duplication","duple","width=350,height=250,top=200,left=800");
+	var ele = document.getElementById("id");
+	
+	correctInputID = false;
+	ele.value = "";
 }
 
 function password_check(ele){
@@ -155,7 +157,6 @@ function password_check(ele){
 }
 
 
-
 function password2_check(ele){
 	
 	var value_origin = document.getElementById("password").value;
@@ -164,22 +165,22 @@ function password2_check(ele){
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
-		correctInputPW = false;
+		correctInputPW2 = false;
 		
 	}
 	else{
 		if(value.indexOf(" ") != -1){
 			message_ele.innerHTML = "공백은 입력할 수 없습니다.";
-			correctInputPW = false;
+			correctInputPW2 = false;
 		}
 		else if(value != value_origin){
 			message_ele.innerHTML = "패스워드 불일치";
-			correctInputPW = false;
+			correctInputPW2 = false;
 		}
 		
 		else{
 			message_ele.innerHTML = "";
-			correctInputPW = true;
+			correctInputPW2 = true;
 		}		
 	}	
 }
@@ -191,17 +192,17 @@ function name_check(ele){
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
-		correctInputPW = false;
+		correctInputName = false;
 		
 	}
 	else{
 		if(value.indexOf(" ") != -1){
 			message_ele.innerHTML = "공백은 입력할 수 없습니다.";
-			correctInputPW = false;
+			correctInputName = false;
 		}
 		else{
 			message_ele.innerHTML = "";
-			correctInputPW = true;
+			correctInputName = true;
 		}		
 	}	
 }
@@ -218,12 +219,21 @@ function email_std_check(ele){
 	else{
 		message_ele.innerHTML = "올바르지 못한 이메일 형식입니다.";
 		correctInputEmail = false;
-	}
+	}	
+}
+
+function submitCheck(){
 	
+	console.log("correctInputID: " + correctInputID);
+	console.log("correctInputPW: " + correctInputPW);
+	console.log("correctInputPW2: " + correctInputPW2);
+	console.log("correctInputName: " + correctInputName);
+	console.log("correctInputEmail: " + correctInputEmail);
 	
+	return correctInputID && correctInputPW && correctInputPW2 && correctInputName && correctInputEmail;
 }
 
 
 </script>
-</script>
+
 </html>

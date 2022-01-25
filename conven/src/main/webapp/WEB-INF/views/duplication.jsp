@@ -107,6 +107,7 @@ td {
 	function idSend() {
 		var ele = document.getElementById("id");
 		opener.idGet(ele.value);
+		window.close();
 	}
 	
 	function checkSubmit(){

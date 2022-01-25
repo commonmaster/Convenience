@@ -14,42 +14,51 @@ public class 회원관리컨트롤러 {
 
 	@Autowired
 	회원관리서비스 회원관리서비스;
-	
+
 	@GetMapping("/join")
 	public String 회원가입화면을준비하다() {
-		
+
 		return "join";
 	}
-	
+
 	@GetMapping("/duplication")
 	public String ID중복체크화면을준비하다() {
-		
+
 		return "duplication";
 	}
-	
+
 	@PostMapping("/duplication")
 	public ModelAndView ID중복체크하다(String id) {
-		
+
 		boolean canUse = 회원관리서비스.ID사용가능확인서비스(id);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("duplication");
 		mav.addObject("canUse", canUse);
 		mav.addObject("id", id);
-		
+
 		return mav;
-		
+
 	}
-	
+
 	@PostMapping("/join")
 	public ModelAndView 회원가입하다(Member member) {
-		
-		회원관리서비스.회원등록서비스(member);
-		
+
 		ModelAndView mav = new ModelAndView();
+
+		int success = 회원관리서비스.회원등록서비스(member);
 		
+		if (success > 0) {
+			mav.addObject("name", member.getName());
+			mav.setViewName("join_result");
+		
+		} else {
+			mav.addObject("id", "이미사용중인ID");
+			mav.setViewName("redirect:/join");
+		}
+
 		return mav;
-		
+
 	}
-	
+
 }
