@@ -1,0 +1,122 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+#bigbox {
+	border: 1px solid blue;
+}
+
+nav {
+	text-align: center;	
+	margin-bottom:-4px;
+	
+}
+
+.login_text a {
+	font-size: 15px;
+	float: right;
+	margin-top:30px;
+	margin-right:50px;
+	text-decoration: none;
+	color: gray;
+	font-weight: bold;
+}
+
+#logining_text1{
+	font-size: 18px;
+	float: right;
+	margin-top:30px;
+	margin-right:20px;
+}
+
+#logining_text2{	
+	float: right;
+	margin-top:30px;
+	margin-right:50px;
+	text-decoration: none;
+	color:blue;
+}
+
+#login_text_divbox{
+	width:1220px;
+	margin:0px auto;
+}
+
+#menu_divbox{
+	clear:both;
+}
+
+#menuimg, #menu {
+	display: inline-block;
+	border-radius: 15px;
+}
+
+#menuimg {
+	width: 56.4px;
+	position: absolute;
+	margin-top: 63.4px;
+}
+
+#menu {
+	background: purple;
+	width: 1220px;
+	
+	margin-top:20px;
+	margin-bottom:0px;
+	
+	
+}
+
+#menu li {
+	float: left;
+	width: 305px;
+	list-style-type: none;
+
+}
+
+#menu li a {
+	text-decoration: none;
+	color: white;
+	font-size: 20px;
+	padding: 15px 0px;
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+}	
+
+#menu li a:hover {
+	color: black;
+}
+
+section {
+	
+	padding:20px;
+	width: 1180px;
+	margin:0px auto;
+}
+
+footer {
+	width: 1180px;
+	padding: 20px;
+	border: solid 1px;
+	background: #E2A9F3;
+	text-align: left;
+	font-weight: bold;
+	font-size: 14px;
+	margin: 0px auto;
+}
+
+#content_iframe {
+	width: 1180px;
+	height: 770px;	
+	overflow: hidden;
+	border:0px;
+}
+
+.long_text a:hover {
+	text-decoration: underline;
+}
+
+	
+	
