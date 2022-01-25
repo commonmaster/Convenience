@@ -50,7 +50,7 @@ public class 회원DAO {
 	
 	}
 	
-	public Member 회원찾기(int no) {
+	public Member 회원찾기ByNo(int no) {
 		
 		Connection conn = getConnection();		
 		PreparedStatement pstmt = null;	
@@ -61,6 +61,30 @@ public class 회원DAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				회원 = toConvertMember(rs);
+			}
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return 회원;
+	}
+	
+public Member 회원찾기ByID(String id) {
+		
+		Connection conn = getConnection();		
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		Member 회원 = null;
+		
+		String sql = "select * from member where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {

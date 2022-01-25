@@ -38,6 +38,14 @@ nav {
 	color:blue;
 }
 
+#logining_text3{	
+	float: right;
+	margin-top:30px;
+	margin-right:10px;
+	text-decoration: none;
+	color:blue;
+}
+
 #login_text_divbox{
 	width:1220px;
 	margin:0px auto;

@@ -89,7 +89,7 @@
 			</td>
 		</tr>
 		<tr><td><span class="tit">비밀번호확인</span><br>
-				<input type="password" name="password2" id="password2" maxlength="14" onblur="password2_check(this)" placeholder="최대  14자"><br>
+				<input type="password" id="password2" maxlength="14" onblur="password2_check(this)" placeholder="최대  14자"><br>
 				<span id="password2_message" class="message"></span>
 			</td>
 		</tr>

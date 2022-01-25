@@ -1,5 +1,7 @@
 package com.stone.springmvc.presentation;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,6 +61,33 @@ public class 회원관리컨트롤러 {
 
 		return mav;
 
+	}
+	
+	@GetMapping("/member")
+	public ModelAndView 회원정보화면을준비하다(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String id = (String)session.getAttribute("conven_session_id");
+		System.out.println("id:" + id);
+		if(id == null) {
+			mav.setViewName("error");
+		}
+		else {
+			Member member = 회원관리서비스.회원찾기서비스ByID(id);
+			System.out.println("member: " + member.toString());
+			mav.setViewName("member");
+			mav.addObject("member", member);
+		}
+		
+		
+		return mav;
+	}
+	
+	@GetMapping("pwd_change")
+	public String 비밀번호변경화면을준비하다() {
+		
+		return "password_change";
 	}
 
 }

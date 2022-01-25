@@ -26,7 +26,9 @@
 			</span>	
 		</c:if>
 		<c:if test="${!empty conven_session_id}">
-			<span><a href="logout" id="logining_text2">로그아웃</a></span>			
+				
+			<span><a href="/logout" id="logining_text2">로그아웃</a></span>
+			<span><a href="/member" id="logining_text3">회원정보</a></span>			
 			<span id="logining_text1"><b>${conven_session_id}</b> 님 환영합니다!</span>			
 		</c:if>
 		

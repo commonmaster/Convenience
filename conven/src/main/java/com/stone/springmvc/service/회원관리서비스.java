@@ -21,4 +21,9 @@ public class 회원관리서비스 {
 		
 		return !회원DAO.아이디가있는가(id);
 	}
+	
+	public Member 회원찾기서비스ByID(String id) {
+		
+		return 회원DAO.회원찾기ByID(id);
+	}
 }
