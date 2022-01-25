@@ -21,6 +21,26 @@ public class 회원관리컨트롤러 {
 		return "join";
 	}
 	
+	@GetMapping("/duplication")
+	public String ID중복체크화면을준비하다() {
+		
+		return "duplication";
+	}
+	
+	@PostMapping("/duplication")
+	public ModelAndView ID중복체크하다(String id) {
+		
+		boolean canUse = 회원관리서비스.ID사용가능확인서비스(id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("duplication");
+		mav.addObject("canUse", canUse);
+		mav.addObject("id", id);
+		
+		return mav;
+		
+	}
+	
 	@PostMapping("/join")
 	public ModelAndView 회원가입하다(Member member) {
 		

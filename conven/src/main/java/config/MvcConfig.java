@@ -42,6 +42,7 @@ public class MvcConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/home")
 				.excludePathPatterns("/login")
 				.excludePathPatterns("/join")
+				.excludePathPatterns("/duplication")
 				.excludePathPatterns("/boards")
 				.excludePathPatterns("/board")
 				.excludePathPatterns("/products")

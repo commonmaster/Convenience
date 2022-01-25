@@ -15,6 +15,8 @@
  	caption{
  		text-align:left;
  		font-size:1.5em;
+ 		font-style:italic;
+ 		font-weight:bold;
  	}
  	
  	#caption_line{
@@ -39,13 +41,27 @@
  		height:20px;
  	}
  	
+ 	#duple_btn{
+ 		padding:5px 8px;
+ 		color:white;
+ 		border-radius:5px;
+ 		font-weight:bold;
+ 		background:purple;
+ 		border:0;
+ 	}
+ 	
  	#submit_btn{
  		width:390px;
- 		height:30px;
+ 		padding:5px;
  		background:purple;
  		color:white;
  		font-weight:bold;
  		border-radius:5px;
+ 	}
+ 	
+ 	.message{
+ 		color:red;
+ 		font-size:0.8em;
  	}
 				
 
@@ -63,7 +79,7 @@
 		
 		
 		<tr><td><span class="tit">아이디</span><br>
-				<input type="text" name="id" id="id" maxlength="14" readonly="readonly">&nbsp;<input type="button" value="중복검사"><br>
+				<input type="text" name="id" id="id" maxlength="14" readonly="readonly">&nbsp;<input type="button" value="중복검사" onclick="openIdDuplecation()" id="duple_btn"><br>
 				<span id="id_message" class="message"></span>
 			</td>
 		</tr>
@@ -105,17 +121,15 @@ var correctInputPW2 = false;
 var correctInputName = false;
 var correctInputEmail = false;
 
-function id_check(ele){
+function idGet(value){
 	
-	var value = ele.value;
-	var message_ele = document.getElementById("id_message");
+	var ele = document.getElementById("id");
+	ele.value = value;
+}
+
+function openIdDuplecation(){
 	
-	if(value.trim() == ""){
-		message_ele.value = "필수 입력 사항입니다.";
-	}
-	else{
-		message_ele.value = "";
-	}	
+	var win = window.open("/duplication","duple","width=350,height=250,top=200,left=800");
 }
 
 function password_check(ele){

@@ -16,4 +16,9 @@ public class 회원관리서비스 {
 		
 		회원DAO.회원등록(새회원);
 	}
+	
+	public boolean ID사용가능확인서비스(String id) {
+		
+		return !회원DAO.아이디가있는가(id);
+	}
 }
