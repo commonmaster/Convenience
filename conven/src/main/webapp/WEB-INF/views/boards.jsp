@@ -268,7 +268,7 @@
 										<c:out value="${board_record.title}"/>
 									</a>
 								</td>			
-								<td class="board_author_td">${board_record.authorId}</td>
+								<td class="board_author_td">${board_record.name}</td>
 								<td class="board_regDate_td">${board_record.printDate()}</td>
 								<td class="board_readCount_td">${board_record.readCount}</td>							
 							</tr>						

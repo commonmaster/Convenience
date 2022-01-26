@@ -29,7 +29,7 @@ button {
 	<span>${name}</span> 님 가입을 환영합니다.
 	<br>
 	<br>
-	<button onclick="location.href='/home'">확인</button>
+	<button onclick="location.href='/main'">확인</button>
 
 </body>
 <script>

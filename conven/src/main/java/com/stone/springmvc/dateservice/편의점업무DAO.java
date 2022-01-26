@@ -30,16 +30,16 @@ public class 편의점업무DAO {
 		
 		String sql = "";
 		if(s_type == 0){ 
-			sql = "select no, title, authorId, contents, DATE_ADD(regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board order by no desc limit ?,?";
+			sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board,member where board.authorId = member.id and isDeleted = 0  order by no desc limit ?,?";
 		}
 		else if(s_type == 1) {
-			sql = "select no, title, authorId, contents, DATE_ADD(regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board where title like ? order by no desc limit ?,?";
+			sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board,member  where board.authorId = member.id and isDeleted = 0 and title like ? order by no desc limit ?,?";
 		}
 		else if(s_type == 2) {
-			sql = "select no, title, authorId, contents, DATE_ADD(regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board where contents like ? order by no desc limit ?,?";
+			sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board,member  where board.authorId = member.id and isDeleted = 0 and contents like ? order by no desc limit ?,?";
 		}
 		else {
-			sql = "select no, title, authorId, contents, DATE_ADD(regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board order by no desc limit ?,?";
+			sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board,member where board.authorId = member.id and isDeleted = 0 order by no desc limit ?,?";
 		}
 		
 		try {
@@ -57,8 +57,10 @@ public class 편의점업무DAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
-				자유게시글리스트.add(convert자유게시글(rs));
+				
+				자유게시글 board = convert자유게시글(rs);
+				board.setName(rs.getString("name"));
+				자유게시글리스트.add(board);
 			}
 			conn.close();
 			
@@ -167,7 +169,7 @@ public class 편의점업무DAO {
 		ResultSet rs = null;
 		
 		
-		String sql = "select no, title, authorId, contents, DATE_ADD(regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board where no=?";
+		String sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount, isDeleted from board,member where board.authorId = member.id and board.no=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -177,6 +179,8 @@ public class 편의점업무DAO {
 			자유게시글 board = null;
 			if(rs.next()) {
 				board = convert자유게시글(rs);
+				board.setName(rs.getString("name"));
+				board.setIsDeleted(rs.getInt("isDeleted"));
 				return board;
 			}
 			
@@ -247,14 +251,14 @@ public class 편의점업무DAO {
 		Connection conn = getConnection();		
 		PreparedStatement pstmt = null;
 		
-		String sql = "delete from board where no=?";
+		String sql = "update board set isDeleted=1 where no=?";
 		
 		try {
 			
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 		
-			pstmt.setLong(1, no);
+			pstmt.setInt(1, no);
 			
 			int success = pstmt.executeUpdate();
 			

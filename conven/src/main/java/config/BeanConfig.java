@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.stone.springmvc.presentation.편의점업무컨트롤러;
-import com.stone.springmvc.presentation.로그인컨트롤러;
+
 import com.stone.springmvc.presentation.회원관리컨트롤러;
 
 import com.stone.springmvc.dateservice.편의점업무DAO;

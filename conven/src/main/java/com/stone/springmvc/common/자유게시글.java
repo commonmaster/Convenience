@@ -8,11 +8,15 @@ public class 자유게시글 {
 	private long no;
 	private String title;
 	private String authorId;
+	private String name;
 	private String contents;
 	private String regDate;
 	private String modifyDate;
-	private int readCount;	
+	private int readCount;
+	private int isDeleted;
 		
+	
+	
 	public long getNo() {
 		return no;
 	}
@@ -37,6 +41,12 @@ public class 자유게시글 {
 	public void setAuthorId(String authorId) {
 		this.authorId = authorId;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getContents() {
 		return contents;
 	}
@@ -54,6 +64,14 @@ public class 자유게시글 {
 	}
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
+	}
+	
+	public int getIsDeleted() {
+		return isDeleted;
+	}
+	
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 	
 	public String printDate() {

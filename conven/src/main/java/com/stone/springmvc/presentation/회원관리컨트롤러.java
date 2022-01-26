@@ -49,11 +49,11 @@ public class 회원관리컨트롤러 {
 		ModelAndView mav = new ModelAndView();
 
 		int success = 회원관리서비스.회원등록서비스(member);
-		
+
 		if (success > 0) {
 			mav.addObject("name", member.getName());
 			mav.setViewName("join_result");
-		
+
 		} else {
 			mav.addObject("id", "이미사용중인ID");
 			mav.setViewName("redirect:/join");
@@ -62,32 +62,65 @@ public class 회원관리컨트롤러 {
 		return mav;
 
 	}
-	
+
 	@GetMapping("/member")
 	public ModelAndView 회원정보화면을준비하다(HttpSession session) {
-		
+
 		ModelAndView mav = new ModelAndView();
-		
-		String id = (String)session.getAttribute("conven_session_id");
+
+		String id = (String) session.getAttribute("conven_session_id");
 		System.out.println("id:" + id);
-		if(id == null) {
+		if (id == null) {
 			mav.setViewName("error");
-		}
-		else {
-			Member member = 회원관리서비스.회원찾기서비스ByID(id);
+		} else {
+			Member member = 회원관리서비스.회원찾기서비스(id);
 			System.out.println("member: " + member.toString());
 			mav.setViewName("member");
 			mav.addObject("member", member);
 		}
-		
-		
 		return mav;
 	}
-	
-	@GetMapping("pwd_change")
-	public String 비밀번호변경화면을준비하다() {
+
+	@PostMapping("/member")
+	public ModelAndView 회원정보변경하다(HttpSession session, Member member) {
 		
+		ModelAndView mav = new ModelAndView();
+
+		String id = (String) session.getAttribute("conven_session_id");
+		Boolean isSuccess = 회원관리서비스.회원정보변경서비스(id, member);
+		if (isSuccess == null) {
+
+			mav.setViewName("error");
+		} else {
+			mav.setViewName("member_change_result");
+			mav.addObject("isSuccess", isSuccess);			
+		}
+
+		return mav;
+	}
+
+	@GetMapping("/pwd_change")
+	public String 비밀번호변경화면을준비하다() {
+
 		return "password_change";
+	}
+
+	@PostMapping("pwd_change")
+	public ModelAndView 비밀번호변경(HttpSession session, String origin_password, String password) {
+
+		ModelAndView mav = new ModelAndView();
+
+		String id = (String) session.getAttribute("conven_session_id");
+		Boolean isSuccess = 회원관리서비스.비밀번호변경서비스(id, origin_password, password);
+		if (isSuccess == null) {
+
+			mav.setViewName("error");
+		} else {
+			mav.setViewName("password_change_result");
+			mav.addObject("isSuccess", isSuccess);
+		}
+
+		return mav;
 	}
 
 }

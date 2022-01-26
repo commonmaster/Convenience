@@ -3,15 +3,24 @@ package com.stone.springmvc.presentation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-public class 로그인컨트롤러 {
 
+import com.stone.springmvc.service.로그인업무서비스;
+import com.stone.springmvc.service.회원관리서비스;
+
+@Controller
+public class 로그인아웃컨트롤러 {
+
+	@Autowired
+	로그인업무서비스 로그인업무서비스;
+	@Autowired
+	회원관리서비스 회원관리서비스;
 		
 	@GetMapping("/login")
 	public ModelAndView 로그인화면을준비하다(HttpSession session) {
@@ -36,21 +45,29 @@ public class 로그인컨트롤러 {
 
 		if (sessionExistCheck(session, "conven_session_id")) {
 
-			mav.setViewName("redirect:/main");
+			mav.setViewName("main");
 		} else {
 
 			if (id != null && password != null) {
-				if (id.equals("user1") && password.equals("1234") || id.equals("user2") && password.equals("1234")) {
-					session.setAttribute("conven_session_id", id);
+				
+				int result = 로그인업무서비스.로그인서비스(id, password);
+								
+				if (result == 1) {					
+					
+					session.setAttribute("conven_session_id", id);					
 					mav.setViewName("redirect:/main");
-				} else {
-					mav.setViewName("error");
+				}				
+				else {
+					
+					mav.addObject("result", result);
+					mav.setViewName("login");
 				}
-			} else {
-				mav.setViewName("redirect:/login_prepare");
+			}else {
+				mav.setViewName("error");
 			}
+			
+		
 		}
-
 		return mav;
 	}
 

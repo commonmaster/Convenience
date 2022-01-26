@@ -30,16 +30,16 @@
  	.tit{
  		font-weight:bold;
  	}
- 	
- 	#id{
- 		width:380px;
- 		height:20px;
- 	} 	
- 	
- 	input[type=password], input[type=email], #name{
+ 	 	
+ 	#id, input[type=email], #name{
  		width:380px;
  		height:20px;
  	}
+ 	
+ 	#password{
+ 		width:275px;
+ 		height:20px;
+ 	} 
  	
  	#pwd_change_btn{
  		padding:5px 8px;
@@ -84,8 +84,9 @@
 			</td>
 		</tr>
 		<tr><td><span class="tit">비밀번호</span><br>
-				<input type="button" value="비밀번호 변경" id="pwd_change_btn" onclick="openPwdChange()">
-				
+				<input type="password" name="password" id="password" maxlength="14" onblur="password_check(this)" placeholder="">
+				<input type="button" value="비밀번호 변경" id="pwd_change_btn" onclick="openPwdChange()"><br>
+				<span id="password_message" class="message"></span>
 			</td>
 		</tr>
 		
@@ -110,14 +111,37 @@
 </body>
 <script>
 
-var correctInputName = false;
-var correctInputEmail = false;
+var correctInputPW = false;
+var correctInputName = true;
+var correctInputEmail = true;
 
 function openPwdChange(){
 	
-	var win = window.open("/pwd_change","pwdChange","width=230,height=290,top=200,left=800");
+	var win = window.open("/pwd_change","pwdChange","width=230,height=390,top=200,left=800");
+	
 }
 
+function password_check(ele){
+	
+	var value = ele.value;
+	var message_ele = document.getElementById("password_message");
+	
+	if(value.length == 0){
+		message_ele.innerHTML = "필수입력사항입니다.";
+		correctInputPW = false;
+		
+	}
+	else{
+		if(value.indexOf(" ") != -1){
+			message_ele.innerHTML = "공백은 입력할 수 없습니다.";
+			correctInputPW = false;
+		}
+		else{
+			message_ele.innerHTML = "";
+			correctInputPW = true;
+		}		
+	}	
+}
 
 function name_check(ele){
 	
@@ -157,11 +181,11 @@ function email_std_check(ele){
 }
 
 function submitCheck(){
-	
+	console.log("correctInputPW: " + correctInputPW);
 	console.log("correctInputName: " + correctInputName);
 	console.log("correctInputEmail: " + correctInputEmail);
 	
-	return correctInputName && correctInputEmail;
+	return correctInputPW && correctInputName && correctInputEmail;
 }
 
 

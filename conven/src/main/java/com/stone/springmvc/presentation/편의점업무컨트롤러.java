@@ -1,5 +1,7 @@
 package com.stone.springmvc.presentation;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,17 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.stone.springmvc.common.Member;
 import com.stone.springmvc.common.자유게시글;
 import com.stone.springmvc.common.자유게시판페이지구성정보;
 import com.stone.springmvc.common.제품;
 import com.stone.springmvc.common.제품페이지구성정보;
 import com.stone.springmvc.service.편의점사이트관리서비스;
+import com.stone.springmvc.service.회원관리서비스;
 
 @Controller
 public class 편의점업무컨트롤러 {
 
 	@Autowired
 	편의점사이트관리서비스 편의점사이트관리서비스;
+	@Autowired
+	회원관리서비스 회원관리서비스;
 
 	@RequestMapping("/test")
 	public String 화면디자인테스트() {
@@ -26,9 +32,15 @@ public class 편의점업무컨트롤러 {
 	}
 
 	@RequestMapping("/main")
-	public ModelAndView 메인화면을준비하다() {
+	public ModelAndView 메인화면을준비하다(HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
+		String id = (String)session.getAttribute("conven_session_id");
+		
+		if(id != null) {
+			Member 회원 = 회원관리서비스.회원찾기서비스(id);
+			mav.addObject("name", 회원.getName());
+		}
 		mav.setViewName("main");
 
 		return mav;
@@ -107,8 +119,13 @@ public class 편의점업무컨트롤러 {
 		자유게시글 board = 편의점사이트관리서비스.자유게시판상세서비스(no);
 
 		if (board != null) {
+			if(board.getIsDeleted() == 0) {
 			mav.setViewName("board");
 			mav.addObject("board", board);
+			}
+			else if(board.getIsDeleted() == 1) {
+				mav.setViewName("deleted_board");
+			}
 		} else {
 			mav.setViewName("error");
 		}
@@ -138,7 +155,7 @@ public class 편의점업무컨트롤러 {
 		편의점사이트관리서비스.자유게시판수정서비스(board);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/board_detail?no=" + board.getNo() + "&pageNo=" + pageNo);
+		mav.setViewName("redirect:/board?no=" + board.getNo() + "&pageNo=" + pageNo);
 
 		return mav;
 	}

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	Boolean canUse = (Boolean) request.getAttribute("canUse");
-	String id = (String) request.getAttribute("id");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +8,7 @@
 <title>Insert title here</title>
 <style>
 table {
-	marin: 20px;
+	margin:20px auto;
 }
 
 caption {
@@ -42,14 +39,14 @@ td {
 </style>
 </head>
 <body>
-
+	
 	<form action="#" method="post" onsubmit="return checkSubmit()">
 		<table>
 			<caption>비밀번호 변경</caption>
 			<tr>
 				<td><span class="tit">기존 비밀번호</span><br> 
-					<input type="password" name="origin_password" id="origin_password" maxlength="14" onblur="password_check(this)" placeholder="최대  14자"><br>
-					<span id="password_message" class="message"></span>
+					<input type="password" name="origin_password" id="origin_password" maxlength="14" onblur="origin_password_check(this)" placeholder=""><br>
+					<span id="origin_password_message" class="message"></span>
 				</td>
 			</tr>
 			
@@ -71,7 +68,7 @@ td {
 		<tr>
 		</table>
 	</form>
-
+	
 
 </body>
 <script>
@@ -79,6 +76,28 @@ td {
 	var correctInputPW = false;
 	var correctInputPW2 = false;
 
+	function origin_password_check(ele){
+		
+		var value = ele.value;
+		var message_ele = document.getElementById("origin_password_message");
+		
+		if(value.length == 0){
+			message_ele.innerHTML = "필수입력사항입니다.";
+			correctInputPW = false;
+			
+		}
+		else{
+			if(value.indexOf(" ") != -1){
+				message_ele.innerHTML = "공백은 입력할 수 없습니다.";
+				correctInputPW = false;
+			}
+			else{
+				message_ele.innerHTML = "";
+				correctInputPW = true;
+			}		
+		}	
+	}
+	
 	function password_check(ele){
 		
 		var value = ele.value;

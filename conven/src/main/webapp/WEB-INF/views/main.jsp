@@ -22,14 +22,14 @@
 		
 		<c:if test="${empty conven_session_id}">
 			<span class="login_text">
-				<a href="/login" target="content_iframe">로그인</a>
+				<a href="/login">로그인</a>
 			</span>	
 		</c:if>
 		<c:if test="${!empty conven_session_id}">
 				
 			<span><a href="/logout" id="logining_text2">로그아웃</a></span>
-			<span><a href="/member" id="logining_text3">회원정보</a></span>			
-			<span id="logining_text1"><b>${conven_session_id}</b> 님 환영합니다!</span>			
+			<span><a href="/member" id="logining_text3" target="content_iframe">회원정보</a></span>			
+			<span id="logining_text1"><b>${name}</b> 님 환영합니다!</span>			
 		</c:if>
 		
 		
