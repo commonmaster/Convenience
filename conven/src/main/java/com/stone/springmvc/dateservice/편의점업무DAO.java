@@ -192,17 +192,18 @@ public class 편의점업무DAO {
 		return null;
 	}
 	
-	public void 자유게시글조회수증가(int no) {
+	public int 자유게시글조회수증가(int no) {
 		Connection conn = getConnection();		
 		PreparedStatement pstmt = null;
+		int success = -1;
 		
 		String sql = "update board set readCount = readCount+1 where no = ?";
 		try {
-			
+			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			
-			int success = pstmt.executeUpdate();
+			success = pstmt.executeUpdate();
 			
 			if(success > 0) {
 				conn.commit();
@@ -213,6 +214,8 @@ public class 편의점업무DAO {
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		return success;
 		
 	}
 	

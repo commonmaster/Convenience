@@ -1,5 +1,8 @@
 package com.stone.springmvc.presentation;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +38,9 @@ public class 편의점업무컨트롤러 {
 	public ModelAndView 메인화면을준비하다(HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		String id = (String)session.getAttribute("conven_session_id");
-		
-		if(id != null) {
+		String id = (String) session.getAttribute("conven_session_id");
+
+		if (id != null) {
 			Member 회원 = 회원관리서비스.회원찾기서비스(id);
 			mav.addObject("name", 회원.getName());
 		}
@@ -112,18 +115,68 @@ public class 편의점업무컨트롤러 {
 	}
 
 	@GetMapping("/board")
-	public ModelAndView 자유게시글상세화면을준비하다(Integer no) {
+	public ModelAndView 자유게시글상세화면을준비하다(Integer no, HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
 		자유게시글 board = 편의점사이트관리서비스.자유게시판상세서비스(no);
 
-		if (board != null) {
-			if(board.getIsDeleted() == 0) {
-			mav.setViewName("board");
-			mav.addObject("board", board);
+		Cookie[] cookies = request.getCookies();
+		String id = (String) session.getAttribute("conven_session_id");
+
+		// 비교하기 위해 새로운 쿠키
+		Cookie viewCookie = null;
+
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				// Cookie의 name이 conven_board + no와 일치하는 쿠키를 viewCookie에 넣어줌
+				if (cookies[i].getName().equals("conven_board" + no)) {
+					System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
+					viewCookie = cookies[i];
+				}
 			}
-			else if(board.getIsDeleted() == 1) {
+		}
+
+		if (board != null) {
+			if (board.getIsDeleted() == 0) {
+
+				// 로그인이 되어있고 
+				if (id != null) {
+					// 쿠키가 없다면
+					if (viewCookie == null) {
+						System.out.println("cookie 없음");
+
+						// 쿠키 생성(이름, 값)
+						Cookie newCookie = new Cookie("conven_board" + no, "|" + no + "|");
+
+						// 쿠키 추가
+						response.addCookie(newCookie);
+
+						// 쿠키를 추가 시키고 조회수 증가시킴
+						int result = 편의점사이트관리서비스.자유게시글조회수증가서비스(no);
+
+						if (result > 0) {
+							System.out.println("조회수 증가");
+							board.setReadCount(board.getReadCount()+1);
+						} else {
+							System.out.println("조회수 증가 에러");
+						}
+					}
+					// viewCookie가 null이 아닐경우 쿠키가 있으므로 조회수 증가 로직을 처리하지 않음.
+					else {
+						System.out.println("cookie 있음");
+						// 쿠키 값 받아옴.
+						String value = viewCookie.getValue();
+						System.out.println("cookie 값 : " + value);
+
+					}
+				}
+
+				mav.setViewName("board");
+				mav.addObject("board", board);
+
+			} else if (board.getIsDeleted() == 1) {
 				mav.setViewName("deleted_board");
 			}
 		} else {
@@ -209,6 +262,5 @@ public class 편의점업무컨트롤러 {
 
 		return mav;
 	}
-
 
 }

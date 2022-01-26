@@ -75,7 +75,7 @@ public class 회원관리컨트롤러 {
 			mav.setViewName("error");
 		} else {
 			Member member = 회원관리서비스.회원찾기서비스(id);
-			System.out.println("member: " + member.toString());
+			
 			mav.setViewName("member");
 			mav.addObject("member", member);
 		}

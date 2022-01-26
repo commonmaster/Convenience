@@ -44,6 +44,11 @@ public class 편의점사이트관리서비스 {
 		return board;
 	}
 	
+	public int 자유게시글조회수증가서비스(int no) {
+		
+		return dao.자유게시글조회수증가(no);
+	}
+	
 	public void 자유게시판수정서비스(자유게시글 board) {
 		
 		dao.자유게시글수정(board);
@@ -73,4 +78,6 @@ public class 편의점사이트관리서비스 {
 		
 		return product;
 	}
+	
+	
 }
