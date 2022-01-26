@@ -49,4 +49,9 @@ public class 회원관리서비스 {
 		
 		return isInputedCorrect;
 	}
+	
+	public void 회원탈퇴서비스(String id) {
+		
+		회원DAO.회원탈퇴ById(id);
+	}
 }

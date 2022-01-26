@@ -101,8 +101,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="center"><input type="submit" id="submit_btn" value="정보 변경"><br><br>
-								<input type="button" id="withdraw_btn" value="회원 탈퇴">
+			<td align="center"><input type="submit" id="submit_btn" value="정보 변경"><br><br><br>
+								<a href="/withdraw" target="_parent">회원 탈퇴</a>
 			</td>
 		<tr>	
 	</table>
@@ -187,6 +187,7 @@ function submitCheck(){
 	
 	return correctInputPW && correctInputName && correctInputEmail;
 }
+
 
 
 </script>

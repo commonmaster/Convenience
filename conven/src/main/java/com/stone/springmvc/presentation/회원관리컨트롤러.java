@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stone.springmvc.common.Member;
@@ -121,6 +122,22 @@ public class 회원관리컨트롤러 {
 		}
 
 		return mav;
+	}
+	
+	@GetMapping("/withdraw")
+	public String 회원탈퇴준비하다() {
+		
+		return "withdraw_confirm";
+	}
+	
+	@PostMapping("/withdraw")
+	public String 회원탈퇴(HttpSession session) {
+		
+		String id = (String) session.getAttribute("conven_session_id");
+		회원관리서비스.회원탈퇴서비스(id);
+		session.invalidate();
+		
+		return "redirect:/main";
 	}
 
 }

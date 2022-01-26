@@ -79,7 +79,7 @@ public class 회원DAO {
 		ResultSet rs = null;
 		Member 회원 = null;
 
-		String sql = "select * from member where id = ?";
+		String sql = "select * from member where id = ? and state=1";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -126,7 +126,7 @@ public class 회원DAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select password from member where id = ?";
+		String sql = "select password from member where id = ? and state=1";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -184,6 +184,29 @@ public class 회원DAO {
 			pstmt.setString(1, member.getName());
 			pstmt.setString(2, member.getEmail());
 			pstmt.setString(3, id);
+
+			int success = pstmt.executeUpdate();
+			if (success > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void 회원탈퇴ById(String id) {
+		
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+
+		String sql = "update member set state=0 where id=?";
+		try {
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
 
 			int success = pstmt.executeUpdate();
 			if (success > 0) {
