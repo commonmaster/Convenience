@@ -35,7 +35,7 @@
  </head>
  <body>
   <img id="img" src="img/logo_ju.jpg"><br>
-  <form id="log" action="/login" method="post" onsubmit="return submitCheck()">
+  <form id="log" action="/login" method="post" onsubmit="return submitCheck()" target="_parent">
 	<table border="0">
 		<tr>
 			<td><input type="text" id="id" name="id" placeholder="아이디"></td>

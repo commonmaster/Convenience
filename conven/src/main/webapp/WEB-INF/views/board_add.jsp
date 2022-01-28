@@ -4,68 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-
-<title>Document</title>
-<link rel="stylesheet" type="text/css" href="css/my.css" />
-<style>
-
-#content_div{
-	width:1160px;	
-}
-
-thead .board_head_line{
-		border-bottom:1px solid purple;
-	}
-
-#board_add_table{
-	margin:0px auto;
-}
-
-caption {
-		padding:10px;
-		font-size:2em;
-		font-style:italic;
-		text-align:left;
-	}
-
-#title{
-	width:1050px;
-	height:40px;
-	font-size:1.2em;
-	padding:5px;
-	margin-top:10px;
-}
-
-#contents{
-	width:1050px;
-	height:420px;
-	font-size:1.3em;
-	padding:5px;
-	margin-top:10px;
-	resize:none;
-}
-
-#board_add_btn_span{
-	float:right;
-}
-
-.board_btn{
-	padding:7.5px 15px;
-	border-radius:10px;
-	margin-left:10px;
-	font-weight:bold;
-	background:#F8E0F1;
-	border:0px;
-}
-</style>
+<title>게시글 추가</title>
+<link rel="stylesheet" type="text/css" href="/css/board_add.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-	
-	
-</script>
 
 </head>
+
 <body>
 		
 	<section>

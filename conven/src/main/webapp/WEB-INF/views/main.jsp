@@ -8,7 +8,7 @@
 
 
 <title>Document</title>
-<link rel="stylesheet" type="text/css" href="/css/my.css" />
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
 
 <style>
 
@@ -22,7 +22,7 @@
 		
 		<c:if test="${empty conven_session_id}">
 			<span class="login_text">
-				<a href="/login">로그인</a>
+				<a href="/login" target="content_iframe">로그인</a>
 			</span>	
 		</c:if>
 		<c:if test="${!empty conven_session_id}">

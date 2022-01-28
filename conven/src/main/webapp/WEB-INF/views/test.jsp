@@ -59,10 +59,6 @@ img{
 	background:pink;
 }
 
-.product_title_span{
-
-}
-
 #product_page_table{
 	margin:0px auto;
 }
