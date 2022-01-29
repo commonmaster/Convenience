@@ -29,6 +29,7 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 
 		List<자유게시글> 자유게시글리스트 = new ArrayList<자유게시글>();
 
+		// 검색 유형에 따라 sql 분리(날짜 제대로 뽑기 위해 *을 안 씀)
 		String sql = "";
 		if (s_type == 0) {
 			sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount from board,member where board.authorId = member.id and isDeleted = 0  order by no desc limit ?,?";
@@ -76,14 +77,14 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 
 		String sql = "";
 		if (s_type == 0) {
-			sql = "select count(*) from board";
+			sql = "select count(*) from board and isDeleted = 0";
 		} else if (s_type == 1) {
 			// System.out.println("타이틀 갯수 조건 검색");
-			sql = "select count(*) from board where title like ?";
+			sql = "select count(*) from board where title like ? and isDeleted = 0";
 		} else if (s_type == 2) {
-			sql = "select count(*) from board where contents like ?";
+			sql = "select count(*) from board where contents like ? and isDeleted = 0";
 		} else {
-			sql = "select count(*) from board";
+			sql = "select count(*) from board and isDeleted = 0";
 		}
 
 		try {

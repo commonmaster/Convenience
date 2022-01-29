@@ -46,6 +46,8 @@ public class 자유게시판컨트롤러 {
 			if (searchContent.trim().equals("")) {
 				검색타입 = 0;
 			}
+		}else {
+			검색타입 = 0;
 		}
 
 		자유게시판페이지구성정보 pageInfo = 자유게시판관리서비스Impl.자유게시판리스트서비스(requestPageNo, 검색타입, searchContent);

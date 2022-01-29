@@ -6,11 +6,17 @@
 <meta charset="UTF-8">
  <title>회원 가입</title>
  <style>
+ 	
  	.join_table{
- 		margin:0px auto;
+ 		margin-left:auto;
+ 		margin-right:auto;
  		border:0;
  		margin-bottom:20px;
  	
+ 	}
+ 	
+ 	#jointable1{
+ 		margin-top:130px;
  	} 	
  	caption{
  		text-align:left;
@@ -70,7 +76,7 @@
  <body>
   
   <form action="/join" method="post" onsubmit="return submitCheck()">
-	<table class="join_table">
+	<table class="join_table" id="jointable1">
 		<caption>회원가입</caption>
 		<tr><td id="caption_line" width="500px"></td></tr>
 	</table>	
@@ -84,22 +90,22 @@
 			</td>
 		</tr>
 		<tr><td><span class="tit">비밀번호</span><br>
-				<input type="password" name="password" id="password" maxlength="14" onblur="password_check(this)" placeholder="최대  14자"><br>
+				<input type="password" name="password" id="password" maxlength="14" onblur="password_check()"><br>
 				<span id="password_message" class="message"></span>
 			</td>
 		</tr>
 		<tr><td><span class="tit">비밀번호확인</span><br>
-				<input type="password" id="password2" maxlength="14" onblur="password2_check(this)" placeholder="최대  14자"><br>
+				<input type="password" id="password2" maxlength="14" onblur="password2_check()"><br>
 				<span id="password2_message" class="message"></span>
 			</td>
 		</tr>
 		<tr><td><span class="tit">이름</span><br>
-				<input type="text" name="name" id="name" maxlength="20" onblur="name_check(this)" placeholder="최대  20자"><br>
+				<input type="text" name="name" id="name" maxlength="20" onblur="name_check()" placeholder="최대  20자"><br>
 				<span id="name_message" class="message"></span>
 			</td>
 		</tr>
 		<tr><td><span class="tit">이메일</span><br>
-				<input type="email" id="email" name="email" onblur="email_std_check(this)"><br>
+				<input type="email" id="email" name="email" onblur="email_std_check()"><br>
 				<span id="email_message" class="message"></span>
 			</td>
 		</tr>
@@ -112,11 +118,6 @@
 </body>
 <script>
 
-var correctInputID = false;
-var correctInputPW = false;
-var correctInputPW2 = false;
-var correctInputName = false;
-var correctInputEmail = false;
 
 function idGet(value){
 	
@@ -134,106 +135,122 @@ function openIdDuplecation(){
 	ele.value = "";
 }
 
-function password_check(ele){
+function password_check(){
 	
-	var value = ele.value;
+	var ele = document.getElementById("password");
+	var password2_ele = document.getElementById("password2");
 	var message_ele = document.getElementById("password_message");
+	var message_ele2 = document.getElementById("password2_message");
+	
+	var value = ele.value;
+	var pattern = /^[0-9a-zA-Z]{4}[0-9a-zA-Z]*$/;
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
-		correctInputPW = false;
+		return false;
 		
 	}
 	else{
-		if(value.indexOf(" ") != -1){
-			message_ele.innerHTML = "공백은 입력할 수 없습니다.";
-			correctInputPW = false;
+		if(pattern.test(value)){
+			if(value == password2_ele.value){
+				message_ele.innerHTML = "";
+				message_ele2.innerHTML = "";
+				return true;
+			}			
+			else{
+			
+				message_ele.innerHTML = "비밀번호 불일치";
+				return false;
+			}
 		}
 		else{
-			message_ele.innerHTML = "";
-			correctInputPW = true;
-		}		
+			message_ele.innerHTML = "4~14자의 영문대소문자, 숫자만 사용가능합니다.";
+			return false;
+		}
 	}	
 }
 
 
-function password2_check(ele){
+function password2_check(){
 	
-	var value_origin = document.getElementById("password").value;
-	var value = ele.value;
+	var ele = document.getElementById("password2");
+	var password_ele = document.getElementById("password");
 	var message_ele = document.getElementById("password2_message");
-	
-	if(value.length == 0){
-		message_ele.innerHTML = "필수입력사항입니다.";
-		correctInputPW2 = false;
-		
-	}
-	else{
-		if(value.indexOf(" ") != -1){
-			message_ele.innerHTML = "공백은 입력할 수 없습니다.";
-			correctInputPW2 = false;
-		}
-		else if(value != value_origin){
-			message_ele.innerHTML = "패스워드 불일치";
-			correctInputPW2 = false;
-		}
-		
-		else{
-			message_ele.innerHTML = "";
-			correctInputPW2 = true;
-		}		
-	}	
-}
-
-function name_check(ele){
+	var message_ele2 = document.getElementById("password_message");
 	
 	var value = ele.value;
-	var message_ele = document.getElementById("name_message");
+	var pattern = /^[0-9a-zA-Z]{4}[0-9a-zA-Z]*$/;
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
-		correctInputName = false;
+		return false;
 		
 	}
 	else{
-		if(value.indexOf(" ") != -1){
-			message_ele.innerHTML = "공백은 입력할 수 없습니다.";
-			correctInputName = false;
+		if(pattern.test(value)){
+			if(value == password_ele.value){
+				message_ele.innerHTML = "";
+				message_ele2.innerHTML = "";
+				return true;
+			}			
+			else{
+			
+				message_ele.innerHTML = "비밀번호 불일치";
+				return false;
+			}
 		}
 		else{
+			message_ele.innerHTML = "4~14자의 영문대소문자, 숫자만 사용가능합니다.";
+			return false;
+		}
+	}	
+}
+
+function name_check(){
+	
+	var value = document.getElementById("name").value;
+	var message_ele = document.getElementById("name_message");
+	var pattern = /^[0-9a-zA-Z가-힣]([_-]?[0-9a-zA-Z가-힣])*$/;
+	
+	if(value.length == 0){
+		message_ele.innerHTML = "필수입력사항입니다.";
+		return false;
+		
+	}
+	else{
+		if(pattern.test(value)){
+			
 			message_ele.innerHTML = "";
-			correctInputName = true;
+			return true;
+		}
+		else{
+			message_ele.innerHTML = "1~20자 한글, 영문대소문자, 숫자, 특수문자( _ )(-)만 사용가능합니다.";	
+			return false;
 		}		
 	}	
 }
 
-function email_std_check(ele){
+function email_std_check(){
 	
+	var value = document.getElementById("email").value;
 	var message_ele = document.getElementById("email_message");
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	
-	if (regEmail.test(ele.value) === true) {
+	if (regEmail.test(value) === true) {
 		message_ele.innerHTML = "";
-		correctInputEmail = true;
+		return true;
 	}
 	else{
 		message_ele.innerHTML = "올바르지 못한 이메일 형식입니다.";
-		correctInputEmail = false;
+		return false;
 	}	
 }
 
 function submitCheck(){
 	
-	console.log("correctInputID: " + correctInputID);
-	console.log("correctInputPW: " + correctInputPW);
-	console.log("correctInputPW2: " + correctInputPW2);
-	console.log("correctInputName: " + correctInputName);
-	console.log("correctInputEmail: " + correctInputEmail);
-	
-	return correctInputID && correctInputPW && correctInputPW2 && correctInputName && correctInputEmail;
+		return password_check() && password2_check() && name_check() && email_std_check();
+
 }
-
-
 </script>
 
 </html>

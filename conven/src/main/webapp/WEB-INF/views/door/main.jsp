@@ -22,7 +22,7 @@
 		
 		<c:if test="${empty conven_session_id}">
 			<span class="login_text">
-				<a href="/login" target="content_iframe">로그인</a>
+				<a href="/login">로그인</a>
 			</span>	
 		</c:if>
 		<c:if test="${!empty conven_session_id}">
@@ -36,7 +36,7 @@
 		</div>
 		<div id="menu_divbox">
 		<ul id="menu">
-			<li><a href="/home" target="content_iframe">Home</a></li>
+			<li><a href="/main">Home</a></li>
 			
 			<li><a href="/products" target="content_iframe">물품 안내</a></li>
 			<li><a href="/boards" target="content_iframe">자유게시판</a></li>

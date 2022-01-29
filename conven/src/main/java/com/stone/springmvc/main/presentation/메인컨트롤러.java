@@ -31,7 +31,7 @@ public class 메인컨트롤러 {
 			Member 회원 = 회원관리서비스.회원찾기서비스(id);
 			mav.addObject("name", 회원.getName());
 		}
-		mav.setViewName("main");
+		mav.setViewName("door/main");
 
 		return mav;
 	}
@@ -40,7 +40,7 @@ public class 메인컨트롤러 {
 	public ModelAndView 홈화면을준비하다() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("home");
+		mav.setViewName("door/home");
 
 		return mav;
 	}

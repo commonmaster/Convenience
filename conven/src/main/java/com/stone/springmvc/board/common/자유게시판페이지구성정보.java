@@ -4,7 +4,7 @@ import java.util.List;
 
 public class 자유게시판페이지구성정보 {
 
-	private int totalRecordCount; // DB에 저장된 게시글의 총 갯수
+	private int totalRecordCount; // DB에 저장된 삭제 되지 않은 게시글의 총 갯수
 	private int currentPage;
 	private List<자유게시글> contents;
 	private int totalPageCount; // 총 페이지의 갯수 = 출력할 수 있는 마지막 페이지

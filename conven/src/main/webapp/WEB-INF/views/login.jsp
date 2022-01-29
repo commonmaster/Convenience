@@ -10,6 +10,7 @@
  	body {text-align:center;}
 	
 	#img{
+		margin-top:130px;
 		width:250px;
 		height:148px;
 		}

@@ -61,7 +61,7 @@ td {
 		<table>
 			<caption>ID 중복검사</caption>
 			<tr>
-				<td><input type="text" maxlength="14" placeholder="최대 14자" id="id" name="id" onblur="id_check(this)" value="${id}">&nbsp;
+				<td><input type="text" maxlength="14" placeholder="3~14자의 아이디 입력" id="id" name="id" onblur="id_check()" value="${id}">&nbsp;
 				<input type="submit" value="중복검사" id="duple_btn"><br>
 				<span id="id_message" class="message"></span></td>
 			</tr>
@@ -84,22 +84,25 @@ td {
 <script>
 	var correctInputID = false;
 
-	function id_check(ele) {
+	function id_check() {
 
-		var value = ele.value;
+		var value = document.getElementById("id").value;
 		var message_ele = document.getElementById("id_message");
-
+		
+		var pattern = /^[0-9a-z]{3}[0-9a-z]*$/;
+		
 		if (value.length == 0) {
 			message_ele.innerHTML = "필수입력사항입니다.";
-			correctInputID = false;
+			return false;
 
 		} else {
-			if (value.indexOf(" ") != -1) {
-				message_ele.innerHTML = "공백은 입력할 수 없습니다.";
-				correctInputID = false;
-			} else {
+			if (pattern.test(value)) {
 				message_ele.innerHTML = "";
-				correctInputID = true;
+				return true;
+			} else {
+				
+				message_ele.innerHTML = "3~14자의 영문자, 숫자만 사용가능합니다.";
+				return false;
 			}
 		}
 	}
@@ -112,11 +115,7 @@ td {
 	
 	function checkSubmit(){
 		
-		var ele = document.getElementById("id");
-		var value = ele.value.trim();
-		ele.value = value;
-		
-		return correctInputID;
+		return id_check();
 	}
 	
 </script>

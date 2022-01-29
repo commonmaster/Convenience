@@ -58,7 +58,7 @@ public class 로그인아웃컨트롤러 {
 				else {
 					
 					mav.addObject("result", result);
-					mav.setViewName("login");
+					mav.setViewName("forward:/login");
 				}
 			}else {
 				mav.setViewName("error");
