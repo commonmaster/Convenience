@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>게시글 추가</title>
 <link rel="stylesheet" type="text/css" href="/css/board_add.css" />
+<style>
+	#logo_img{
+		border-radius: 15px;
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
@@ -14,10 +19,12 @@
 		
 	<section>
 		<div id="content_div">
-		
+			<div align="center">
+			<img id="logo_img" src="img/logo_ju2.jpg">
+			</div>
 			<form action="board_add" method="post">
 			<table border="0" id="board_add_table">
-				<caption>자유게시판 글쓰기<span id="board_add_btn_span"><input type="submit" value="등록 " class="board_btn"></span></caption>
+				<caption>자유게시판 글쓰기<span class="float_right"><input type="submit" value="등록 " class="board_btn"><button class="board_btn" onclick="history.back()">취소</button></span></caption>
 				<thead>
 					<tr>
 						<td class="board_head_line" width="1050px"></td>

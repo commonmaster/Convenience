@@ -1,5 +1,15 @@
-@charset "UTF-8";
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 
+
+<title>menu</title>
+
+<style>
 body {
 	padding: 0px;
 	margin: 0px;
@@ -9,7 +19,7 @@ body {
 	border: 1px solid blue;
 }
 
-nav {
+#nav {
 	text-align: center;	
 	margin-bottom:-4px;
 	
@@ -99,24 +109,6 @@ nav {
 	color: black;
 }
 
-section {
-	
-	padding:20px;
-	width: 1180px;
-	margin:0px auto;
-}
-
-footer {
-	width: 1180px;
-	padding: 20px;
-	border: solid 1px;
-	background: #E2A9F3;
-	text-align: left;
-	font-weight: bold;
-	font-size: 14px;
-	margin: 0px auto;
-}
-
 #content_iframe {
 	width: 1180px;
 	height: 770px;	
@@ -127,6 +119,36 @@ footer {
 .long_text a:hover {
 	text-decoration: underline;
 }
+</style>
 
+</head>
+<body>	
+	<div id="nav">
+		<div id="login_text_divbox">
+		
+		<c:if test="${empty conven_session_id}">
+			<span class="login_text">
+				<a href="/login">로그인</a>
+			</span>	
+		</c:if>
+		<c:if test="${!empty conven_session_id}">
+				
+			<span><a href="/logout" id="logining_text2">로그아웃</a></span>
+			<span><a href="/member" id="logining_text3">회원정보</a></span>			
+			<span id="logining_text1"><b>${name}</b> 님 환영합니다!</span>			
+		</c:if>		
+		
+		</div>
+		<div id="menu_divbox">
+		<ul id="menu">
+			<li><a href="/main">Home</a></li>			
+			<li><a href="/products">물품 안내</a></li>
+			<li><a href="/boards">자유게시판</a></li>
+		</ul>
+		</div>
+	</div>
 	
 	
+
+</body>
+</html>

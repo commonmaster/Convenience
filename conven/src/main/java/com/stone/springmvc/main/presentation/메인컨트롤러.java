@@ -31,7 +31,7 @@ public class 메인컨트롤러 {
 			Member 회원 = 회원관리서비스.회원찾기서비스(id);
 			mav.addObject("name", 회원.getName());
 		}
-		mav.setViewName("door/main");
+		mav.setViewName("door/home");
 
 		return mav;
 	}

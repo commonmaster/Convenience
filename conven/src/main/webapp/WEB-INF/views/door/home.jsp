@@ -9,50 +9,56 @@
 <title>Home</title>
 
 <style>
+
+section {
+	
+	padding:20px;
+	width: 1180px;	
+	margin:0px auto;
+	border:1px solid red;	
+	
+}
+
 #content_div{
-	width:1160px;			
-	position: relative;
+	width:1160px;
+	border:1px solid blue;
 }
 
-
-#building_img_div{
-	display:inline-block;
-	position:fixed;
-	bottom:0px;
-	left:340px;	
+#logo_img{
+	width:300px;
 }
+
 
 #building_img{
 	width:500px;
 	
 }
 
-#logo_plus_text{
+.align_center{
 	text-align:center;
-	}
+}
 
 </style>
 
 
 </head>
 <body>
-		
+	<nav>
+		<%@include file="../include/nav_contents.jsp" %>
+	</nav>	
+	
 	<section>
 		<div id="content_div">
-		<div id="logo_plus_text">
-		<img id="img" src="img/logo_ju.jpg">
-		
-		<h1>어서오세요! CU 같은 편의점 JU입니다!!</h1>
-		</div>
-		<div id="building_img_div">
-			<img src="img/building_ju.png" id="building_img">
-		</div>
-		</div>
-		
-		
+			<div class="align_center">
+				<img id="logo_img" src="img/logo_ju.jpg">
+				<h1>어서오세요! CU 같은 편의점 JU입니다!!</h1>		
+				<img src="img/building_ju.png" id="building_img">
+			</div>		
+		</div>		
 	</section>
-
-	
+	<footer>
+		<%@include file="../include/footer_contents.jsp" %>
+	</footer>
 
 </body>
 </html>

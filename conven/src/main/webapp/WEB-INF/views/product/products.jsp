@@ -10,6 +10,16 @@
 
 <style>
 
+section {
+	
+	padding:20px;
+	width: 1180px;
+	height:730px;
+	margin:0px auto;
+	border:1px solid red;	
+	
+}
+
 #content_div{
 	width:1160px;		
 }
@@ -117,47 +127,18 @@ select {
 	}
 
 </style>
-<script>
-	$().ready(function() {
-		$(".product_box").on("click", function(e) {
-			//alert(e.currentTarget.getAttribute("id"));
-			var newWin = window.open("product?barcode="+e.currentTarget.getAttribute("id"),"newW",'top=200, left=650, width=540, height=400, status=no, menubar=no, toolbar=no, resizable=no');
-			// resize = 크롬 안됨.. ㅠㅜ
 
-		});
-
-		$(".product_box").on("mouseover", function(e) {
-
-			var ele = $(e.currentTarget);
-			ele.css("box-shadow", "10px 5px 5px purple");
-		});
-
-		$(".product_box").on("mouseout", function(e) {
-
-			var ele = $(e.currentTarget);
-			ele.css("box-shadow", "0px 0px 0px purple");
-		});
-		
-		$("#category").change(function(){
-			$("#category_form").submit();
-		});
-		
-		$("#category").find('option:eq(${selectCategory})').prop("selected", true);
-		
-		
-	});
-	
-	
-	
-</script>
 
 </head>
 <body>
 
+	<nav>
+		<%@include file="../include/nav_contents.jsp"%>
+	</nav>
 	<section>
 		
 		<div id="content_div">
-		<form action="product" name="category_form" id="category_form">	
+		<form action="/products" name="category_form" id="category_form">	
 			<select name="category" id="category">
    				<option value="0">ALL</option>
    			 	<option value="1">과자</option>
@@ -214,5 +195,41 @@ select {
 		</div>
 	</section>
 	
+	<footer>
+		<%@include file="../include/footer_contents.jsp"%>
+	</footer>
+	
 </body>
+
+<script>
+	$().ready(function() {
+		$(".product_box").on("click", function(e) {
+			//alert(e.currentTarget.getAttribute("id"));
+			var newWin = window.open("product?barcode="+e.currentTarget.getAttribute("id"),"newW",'top=200, left=650, width=540, height=400, status=no, menubar=no, toolbar=no, resizable=no');
+			// resize = 크롬 안됨.. ㅠㅜ
+
+		});
+
+		$(".product_box").on("mouseover", function(e) {
+
+			var ele = $(e.currentTarget);
+			ele.css("box-shadow", "10px 5px 5px purple");
+		});
+
+		$(".product_box").on("mouseout", function(e) {
+
+			var ele = $(e.currentTarget);
+			ele.css("box-shadow", "0px 0px 0px purple");
+		});
+		
+		$("#category").change(function(){
+			$("#category_form").submit();
+		});
+		
+		$("#category").find('option:eq(${selectCategory})').prop("selected", true);
+		
+		
+	});	
+	
+</script>
 </html>

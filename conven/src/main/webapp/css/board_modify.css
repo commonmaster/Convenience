@@ -1,13 +1,18 @@
 @charset "UTF-8";
 
 #content_div{
-	width:1160px;	
+	
+}
+
+table{
+	margin: 570px auto 0px auto;	
 }
 
 caption {
 		padding:10px;
 		font-size:2em;
 		font-style:italic;
+		text-align:left;
 	}
 
 thead .board_head_line{

@@ -16,7 +16,7 @@
  	}
  	
  	#jointable1{
- 		margin-top:130px;
+ 		margin-top:50px;
  	} 	
  	caption{
  		text-align:left;
@@ -147,6 +147,7 @@ function password_check(){
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
+		ele.focus();
 		return false;
 		
 	}
@@ -160,11 +161,13 @@ function password_check(){
 			else{
 			
 				message_ele.innerHTML = "비밀번호 불일치";
+				
 				return false;
 			}
 		}
 		else{
 			message_ele.innerHTML = "4~14자의 영문대소문자, 숫자만 사용가능합니다.";
+			ele.focus();
 			return false;
 		}
 	}	
@@ -183,6 +186,7 @@ function password2_check(){
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
+		ele.focus();
 		return false;
 		
 	}
@@ -196,11 +200,13 @@ function password2_check(){
 			else{
 			
 				message_ele.innerHTML = "비밀번호 불일치";
+				
 				return false;
 			}
 		}
 		else{
 			message_ele.innerHTML = "4~14자의 영문대소문자, 숫자만 사용가능합니다.";
+			ele.focus();
 			return false;
 		}
 	}	
@@ -208,12 +214,14 @@ function password2_check(){
 
 function name_check(){
 	
-	var value = document.getElementById("name").value;
+	var ele = document.getElementById("name");
+	var value = ele.value;
 	var message_ele = document.getElementById("name_message");
 	var pattern = /^[0-9a-zA-Z가-힣]([_-]?[0-9a-zA-Z가-힣])*$/;
 	
 	if(value.length == 0){
 		message_ele.innerHTML = "필수입력사항입니다.";
+		ele.focus();
 		return false;
 		
 	}
@@ -225,6 +233,7 @@ function name_check(){
 		}
 		else{
 			message_ele.innerHTML = "1~20자 한글, 영문대소문자, 숫자, 특수문자( _ )(-)만 사용가능합니다.";	
+			ele.focus();
 			return false;
 		}		
 	}	
@@ -232,7 +241,8 @@ function name_check(){
 
 function email_std_check(){
 	
-	var value = document.getElementById("email").value;
+	var ele = document.getElementById("email");
+	var value = ele.value;
 	var message_ele = document.getElementById("email_message");
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	
@@ -242,6 +252,7 @@ function email_std_check(){
 	}
 	else{
 		message_ele.innerHTML = "올바르지 못한 이메일 형식입니다.";
+		ele.focus();
 		return false;
 	}	
 }

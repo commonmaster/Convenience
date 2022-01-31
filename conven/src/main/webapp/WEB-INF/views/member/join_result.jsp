@@ -10,6 +10,9 @@ body {
 	text-align: center;
 }
 
+#cotents{
+	margin-top:170px;
+}
 span {
 	font-size: 1.5em;
 }
@@ -26,11 +29,12 @@ button {
 </style>
 </head>
 <body>
+	<div id="cotents">
 	<span>${name}</span> 님 가입을 환영합니다.
 	<br>
 	<br>
 	<button onclick="window.open('/main','_parent')">확인</button>
-
+	</div>
 </body>
 <script>
 	

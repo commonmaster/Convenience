@@ -5,7 +5,7 @@ section{
 }
 
 #content_div{
-	width:1160px;	
+	
 }
 
 thead .board_head_line{
@@ -40,7 +40,7 @@ caption {
 	resize:none;
 }
 
-#board_add_btn_span{
+.float_right{
 	float:right;
 }
 

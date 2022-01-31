@@ -10,5 +10,5 @@ public interface 자유게시판관리서비스 {
 	public 자유게시글 자유게시판상세서비스(int 게시글번호);
 	public int 자유게시판조회수증가서비스(int 게시글번호);
 	public void 자유게시판수정서비스(자유게시글 게시글);
-	public void 자유게시판삭제서비스(int 게시글번호);
+	public boolean 자유게시판삭제서비스(String 아이디, int 게시글번호);
 }

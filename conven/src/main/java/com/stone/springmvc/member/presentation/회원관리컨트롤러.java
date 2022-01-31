@@ -20,13 +20,13 @@ public class 회원관리컨트롤러 {
 	@GetMapping("/join")
 	public String 회원가입화면을준비하다() {
 
-		return "join";
+		return "member/join";
 	}
 
 	@GetMapping("/duplication")
 	public String ID중복체크화면을준비하다() {
 
-		return "duplication";
+		return "member/duplication";
 	}
 
 	@PostMapping("/duplication")
@@ -35,7 +35,7 @@ public class 회원관리컨트롤러 {
 		boolean canUse = 회원관리서비스Impl.ID사용가능확인서비스(id);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("duplication");
+		mav.setViewName("member/duplication");
 		mav.addObject("canUse", canUse);
 		mav.addObject("id", id);
 
@@ -44,7 +44,7 @@ public class 회원관리컨트롤러 {
 	}
 
 	@PostMapping("/join")
-	public ModelAndView 회원가입하다(Member member) {
+	public ModelAndView 회원가입하다(Member member, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -52,10 +52,12 @@ public class 회원관리컨트롤러 {
 
 		if (success > 0) {
 			mav.addObject("name", member.getName());
-			mav.setViewName("join_result");
+			mav.setViewName("member/join_result");
+			session.setAttribute("conven_session_id", member.getId());
 
 		} else {
 			mav.addObject("id", "이미사용중인ID");
+			// 중복확인을 했으나 그 사이에 이미 아이디 등록됨
 			mav.setViewName("redirect:/join");
 		}
 
@@ -75,7 +77,7 @@ public class 회원관리컨트롤러 {
 		} else {
 			Member member = 회원관리서비스Impl.회원찾기서비스(id);
 			
-			mav.setViewName("member");
+			mav.setViewName("member/member");
 			mav.addObject("member", member);
 		}
 		return mav;
@@ -92,7 +94,7 @@ public class 회원관리컨트롤러 {
 
 			mav.setViewName("error");
 		} else {
-			mav.setViewName("member_change_result");
+			mav.setViewName("member/member_change_result");
 			mav.addObject("isSuccess", isSuccess);			
 		}
 
@@ -116,7 +118,7 @@ public class 회원관리컨트롤러 {
 
 			mav.setViewName("error");
 		} else {
-			mav.setViewName("password_change_result");
+			mav.setViewName("member/password_change_result");
 			mav.addObject("isSuccess", isSuccess);
 		}
 
@@ -126,7 +128,7 @@ public class 회원관리컨트롤러 {
 	@GetMapping("/withdraw")
 	public String 회원탈퇴준비하다() {
 		
-		return "withdraw_confirm";
+		return "member/withdraw_confirm";
 	}
 	
 	@PostMapping("/withdraw")

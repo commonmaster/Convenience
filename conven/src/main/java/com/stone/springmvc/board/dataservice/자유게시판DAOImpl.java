@@ -77,14 +77,14 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 
 		String sql = "";
 		if (s_type == 0) {
-			sql = "select count(*) from board and isDeleted = 0";
+			sql = "select count(*) from board where isDeleted = 0";
 		} else if (s_type == 1) {
 			// System.out.println("타이틀 갯수 조건 검색");
 			sql = "select count(*) from board where title like ? and isDeleted = 0";
 		} else if (s_type == 2) {
 			sql = "select count(*) from board where contents like ? and isDeleted = 0";
 		} else {
-			sql = "select count(*) from board and isDeleted = 0";
+			sql = "select count(*) from board where isDeleted = 0";
 		}
 
 		try {

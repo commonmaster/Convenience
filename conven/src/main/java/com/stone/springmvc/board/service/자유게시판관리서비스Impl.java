@@ -59,9 +59,18 @@ public class 자유게시판관리서비스Impl implements 자유게시판관리
 	
 	
 	@Override
-	public void 자유게시판삭제서비스(int 게시글번호) {
-	
+	public boolean 자유게시판삭제서비스(String id, int 게시글번호) {
+		자유게시글 board = 자유게시판DAOImpl.get자유게시글(게시글번호);
+		if(id.equals(board.getAuthorId())) {
+			// todo
+		}
+		else {
+			
+		}
+		
 		자유게시판DAOImpl.delete자유게시글(게시글번호);
+		
+		return true;
 	}
 	
 	

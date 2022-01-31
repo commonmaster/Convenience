@@ -1,8 +1,11 @@
 package env;
 
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -20,11 +23,34 @@ public class 로그인확인자 extends HandlerInterceptorAdapter{
 		}
 		
 		if(!로그인중) {
+						
+			String url = request.getServletPath();
+	        System.out.println("url : " + url);
+	        String query = request.getQueryString(); //파라미터가 있는지 없는지
+	        System.out.println("query: " + query);
+	        
+	        if(url == null) {
+	        	url = "/main";
+	        }
+	        if(query != null){ //주소가 board?no=34&page=33
+
+	            url = url + "?" + query;
+
+	        }
 			
-			response.sendRedirect("/login");
+	        HttpSession httpSession = request.getSession();
+	        System.out.println("최종 url: " + url);
+	        httpSession.setAttribute("prev_url", url);
+	        
+	        response.sendRedirect("/login");
+			
 			return 로그인중;
+			
+			
 		}
 		
 		return 로그인중;
 	}
+	
+	
 }
