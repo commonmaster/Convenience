@@ -165,7 +165,7 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount, isDeleted from board,member where board.authorId = member.id and board.no=?";
+		String sql = "select board.no, title, authorId, name, contents, DATE_ADD(board.regDate, INTERVAL 9 HOUR) as regDate, DATE_ADD(modifyDate, INTERVAL 9 HOUR) as modifyDate, readCount, isDeleted from board,member where board.authorId = member.id and board.no=? and isDeleted = 0";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

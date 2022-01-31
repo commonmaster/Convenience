@@ -23,13 +23,13 @@
 </head>
 <body>
 <table>
-	<tr><td><%if(isSuccess){ %>
+	<tr><th><%if(isSuccess){ %>
 				<b>비밀번호 변경 완료</b>
 			<%}else{ %>
 				<b>기존 비밀번호 불일치</b>
 			<%} %>
-		</td></tr>
-	<tr><td align="center"><button id="ok_btn" onclick="window.close()">확인</button></td></tr>	
+		</th></tr>
+	<tr><th><button id="ok_btn" onclick="window.close()">확인</button></th></tr>	
 
 </table>
 

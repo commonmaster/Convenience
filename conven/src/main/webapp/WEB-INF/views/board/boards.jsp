@@ -240,10 +240,10 @@ tfoot th a {
 					<c:forEach var="board_record" items="${pageInfo.contents}">
 						<tr>
 							<td class="board_no_td">${board_record.no}</td>
-							<td class="board_title_td"><a
-								href="board?no=${board_record.no}&pageNo=${pageInfo.currentPage}&searchType=${searchType}&searchContent=${searchContent}">
-									<c:out value="${board_record.title}" />
-							</a></td>
+							<td class="board_title_td">
+								<a href="board?no=${board_record.no}&pageNo=${pageInfo.currentPage}&searchType=${searchType}&searchContent=${searchContent}">
+								<c:out value="${board_record.title}" /></a>
+							</td>
 							<td class="board_author_td">${board_record.name}</td>
 							<td class="board_regDate_td">${board_record.printDate()}</td>
 							<td class="board_readCount_td">${board_record.readCount}</td>
