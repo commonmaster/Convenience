@@ -228,6 +228,7 @@ tfoot th a {
 								</c:forEach> <c:if test="${pageInfo.endPage < pageInfo.totalPageCount}">
 									<a href="boards?pageNo=${pageInfo.endPage + 1}&searchType=${searchType}&searchContent=${searchContent}" class="page_str_a">[다음]</a>
 								</c:if>
+							</th>	
 						</tr>
 					</c:if>
 
@@ -235,7 +236,8 @@ tfoot th a {
 
 				<tbody>
 					<c:if test="${pageInfo.hasNoRecords()}">
-						<th colspan="5" id="hasNoRecord">게시글이 없습니다</th>
+						
+						<tr><th colspan="5" id="hasNoRecord">게시글이 없습니다</th></tr>
 					</c:if>
 					<c:forEach var="board_record" items="${pageInfo.contents}">
 						<tr>
@@ -257,7 +259,7 @@ tfoot th a {
 						<option value="1">제목</option>
 						<option value="2">내용</option>
 					</select>
-					<input type="text" id="search_input" name="searchContent"	required="required" value=${searchContent}> 
+					<input type="text" id="search_input" name="searchContent" required="required" value=${searchContent}> 
 					<input type="submit" value="검색" id="search_btn">
 				</form>
 			</div>

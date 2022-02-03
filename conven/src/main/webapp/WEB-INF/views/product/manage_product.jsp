@@ -40,13 +40,15 @@
 	}
 	
 	.standard_btn{
-	padding:7.5px 15px;
-	border-radius:10px;
-	margin:0px 50px;
+	display:inline-block;
+	padding:15px;
+	border-radius:10px;	
+	width:200px;
 	font-weight:bold;
 	background:#F8E0F1;
 	border:0px;
 	font-size:1.2em;
+	margin: 0px 10px;
 	
 }
 	
@@ -69,7 +71,7 @@
 <tr><th height="48px" class="tit" width="60px">상태</th>
 <td class="tit_contents">
 <c:if test="${product.isExcluded == 1}">
-	판매하지 않음
+	판매중지
 </c:if>
 <c:if test="${product.isExcluded == 0}">
 	판매중
@@ -78,7 +80,7 @@
 	보류
 </c:if>
 </td><th class="tit">제조사</th><td class="tit_contents">${product.provider }</td></tr>
-<tr><th colspan="5" height="180px"><button onclick="location.href='/manage_product_modify/${product.barcode}'" class="standard_btn">수정</button><button onclick="history.back()" class="standard_btn">목록</button></th></tr>
+<tr><th colspan="5" height="180px"><button onclick="location.href='/manage_product_modify?barcode=${product.barcode}'" class="standard_btn">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="history.back()" class="standard_btn">취소</a></th></tr>
 
 </table>
 

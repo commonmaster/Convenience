@@ -13,9 +13,7 @@
 	
 	.tit{
 		background:#F8E0F1;
-	}
-	
-	
+	}	
 	
 	th,td{padding:5px;}
 	
@@ -34,6 +32,48 @@
 		color:blue;
 	}
 	
+	.product_barcode_td, .product_name_td, .product_type_td, .product_price_td, .product_provider_td{
+		text-align:center;
+	}
+	
+	#contents_p_space{
+		height:76px;
+	}
+	
+	.page_th{
+		height:52px;
+	}
+	
+	.page_th .page_num_a {
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+	}
+
+	.page_str_a {
+		width: 40px;
+	}
+	
+	.product_name_td a, .page_th a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	#currentPage_a {
+		border: 1px solid purple;
+	}
+	
+	#search_btn {
+		width: 52px;
+		height: 32px;
+		border: 0px;
+		background: purple;
+		color: white;
+		font-weight: bold;
+	}
+	
+}
+	
 </style>
 </head>
 <body>
@@ -41,6 +81,7 @@
 <table>
 <thead><tr><th width="130px" class="tit">바코드</th><th width="380px" class="tit">제품명</th><th width="100px" class="tit">종류</th><th width="80px" class="tit">가격</th><th width="240px" class="tit">제조사</th></tr></thead>
 <tfoot>
+<tr><td colspan="5" id="contents_p_space"></td></tr>
 <c:if test="${pageInfo.hasRecords()}">
 	<tr>
 		<th colspan="5" class="page_th">
@@ -62,8 +103,7 @@
 
 
 </tfoot>
-<tbody>
-	<tr><th colspan="5" height="300px"><span id="hasNoRecord">판매중인 제품이 없습니다.</span></th></tr>
+<tbody>	
 	<c:if test="${pageInfo.hasNoRecords()}">
 		<th colspan="5" id="hasNoRecord" height="300px">게시글이 없습니다</th>
 	</c:if>
@@ -71,7 +111,7 @@
 		<tr>
 			<td class="product_barcode_td">${product_record.barcode}</td>
 			<td class="product_name_td">
-				<a href="product?barcode=${product_record.barcode}&pageNo=${pageInfo.currentPage}&searchContent=${searchContent}">
+				<a href="manage_product?barcode=${product_record.barcode}&pageNo=${pageInfo.currentPage}&searchContent=${searchContent}">
 					<c:out value="${product_record.name}" /></a>
 			</td>
 			<td class="product_type_td">
@@ -88,6 +128,30 @@
 
 
 </table>
-<div align="center"><input type="text" name="name" placeholder="제품명 검색">&nbsp;<button>검색</button></div>
+<div align="center">
+<form action="/manage_products">
+<input type="text" name="searchContent" placeholder="제품명 검색" value=${searchContent}>&nbsp;<input type="submit" value="검색" id="search_btn" >
+</form>
+</div>
 </body>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$().ready(
+		function() {
+			$(".product_name_td a, .page_th a").on("mouseover", function(e) {
+				var ele = $(e.target);
+				ele.css({
+					"text-decoration" : "underline"
+				});
+			});
+
+			$(".product_name_td a, .page_th a").on("mouseout", function(e) {
+				var ele = $(e.target);
+				ele.css({
+					"text-decoration" : "none"
+				});
+			});
+		});	
+</script>
+
 </html>

@@ -13,5 +13,10 @@ public interface 제품DAO {
 	제품 get제품(int barcode);
 	
 	void insert제품(제품 등록제품);
+	
+	List<제품> get매니저제품리스트(int startRow, int showRecordCount, int 제외유무, int 검색타입, String 검색내용);
+	
+	int get매니저제품갯수(int 제외유무, int 검색타입, String 검색내용);
+	
 
 }

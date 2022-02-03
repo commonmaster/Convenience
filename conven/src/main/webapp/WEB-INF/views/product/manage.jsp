@@ -33,7 +33,7 @@
 <table>
 <tr><th><img id="logo_img" src="img/logo_ju.jpg"><th><tr>
 <tr><td><button class="big_btn" onclick="location.href='/manage_product_add'">물품등록</button></td></tr>
-<tr><td><button class="big_btn">물품목록(진열)</button></td></tr>
+<tr><td><button class="big_btn" onclick="location.href='/manage_products'">물품목록(진열)</button></td></tr>
 <tr><td><button class="big_btn">물품목록(제외)</button></td></tr>
 </table>
 

@@ -54,11 +54,11 @@
 </style>
 </head>
 <body>
-
+<div align="center" id="logo_div"><img id="logo_img" src="/img/logo_ju2.jpg" style="vertical-align:middle;"><span>제품 등록</span></div>
 <form action="/manage_product_add" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit()">
 <table>
-<tr><th colspan="5"><img id="logo_img" src="/img/logo_ju2.jpg"><span>제품 등록</span></th></tr>
-<tr><th colspan="2" rowspan="4"><img src="img/noimg.png" width="230" height="230" id="productImg"></th><th class="tit" width="60px">바코드</th><td><input type="number" name="barcode" id="barcode"></td><td rowspan="5"><textarea rows="19" cols="50" name="intro" id="intro" placeholder="제품 소개"></textarea></tr>
+
+<tr><th colspan="2" rowspan="4"><img src="img/noimg.png" width="230" height="230" id="productImg"></th><th class="tit" width="60px">바코드</th><td><input type="number" name="barcode" id="barcode"></td><td rowspan="5"><textarea rows="19" cols="50" name="intro" id="intro" placeholder="제품 소개(최대 100자)" maxlength="100"></textarea></tr>
 <tr><th class="tit">제품명</th><td><input type="text" name="name" id="name" autocomplete="off"></td></tr>
 <tr><th class="tit">종류</th><td><select name="type" id="type">   				
    			 	<option value="1">과자</option>

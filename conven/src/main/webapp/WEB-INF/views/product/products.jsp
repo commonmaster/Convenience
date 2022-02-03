@@ -197,6 +197,7 @@ select {
 								<c:if test="${pageInfo.endPage < pageInfo.totalPageCount}">
 									<a href="products?pageNo=${pageInfo.endPage + 1}&category=${selectCategory}" class="page_str_a">[다음]</a>
 								</c:if>
+							</th>	
 						</tr>
 				</c:if>	
 				</table>

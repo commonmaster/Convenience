@@ -43,7 +43,7 @@
  <body>
   <table border="1">
   	<tr>
-  		<td colspan="2" id="product_detail_img_td"><img src="/productImg/${product.barcode}" id="product_detail_img"></td><td width="300px" id="product_detail_intro_td">${product.intro }</td>
+  		<td colspan="2" id="product_detail_img_td"><img src="/productImg/${product.barcode}" id="product_detail_img"></td><td width="300px" id="product_detail_intro_td">${product.intro}</td>
 	</tr>
 	<tr><td id="product_detail_name_t_td">제품명</td><td id="product_detail_name_td" 	colspan="2">${product.name }</td></tr>
 	<tr><td width=60px;>종&nbsp;&nbsp;&nbsp;류</td><td colspan="2">${product.type }</td></tr>

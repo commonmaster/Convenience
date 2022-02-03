@@ -74,13 +74,13 @@ public class 제품DAOImpl implements 제품DAO {
 			 sql = "select count(*) from product where isExcluded=0";
 		 }
 		 else if(search_category ==1) {
-			 sql = "select count(*) from product where type='snack' and isExcluded=0";
+			 sql = "select count(*) from product where type=1 and isExcluded=0";
 		 }
 		 else if(search_category == 2) {
-			 sql = "select count(*) from product where type='drink' and isExcluded=0";
+			 sql = "select count(*) from product where type=2 and isExcluded=0";
 		 }
 		 else if(search_category == 3) {
-			 sql = "select count(*) from product where type='icecream' and isExcluded=0";
+			 sql = "select count(*) from product where type=3 and isExcluded=0";
 		 }
 		 else {
 			 sql = "select count(*) from product where isExcluded=0";
@@ -183,6 +183,94 @@ public class 제품DAOImpl implements 제품DAO {
 			System.out.println("여기서 발생");
 			System.out.println(e.getMessage());
 		}		
+	}
+	
+	@Override
+	public List<제품> get매니저제품리스트(int startRow, int showRecordCount, int isExcluded, int searchType, String searchContent) {
+
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		
+
+		List<제품> 제품리스트 = new ArrayList<제품>();		
+		
+		String sql = "";		
+		
+		
+		if(searchType == 0) {
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where isExcluded=? order by name desc limit ?,?";
+		}
+		else if(searchType == 1){
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where isExcluded=? and name like ? order by name desc limit ?,?";
+		}
+		else {
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where isExcluded=? order by name desc limit ?,?";
+		}
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, isExcluded);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, showRecordCount);
+			if(searchType == 1) {
+				pstmt.setString(2, "%"+searchContent+"%");
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, showRecordCount);
+			}
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				제품리스트.add(convert제품(rs));
+			}
+			conn.close();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return 제품리스트;
+	}
+	
+	@Override
+	public int get매니저제품갯수(int isExcluded, int searchType, String searchContent) {
+		
+		 Connection conn = DBUtil.getConnection();
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 
+		 String sql = "";
+		 
+		 if(searchType == 0) {
+			 sql = "select count(*) from product where isExcluded=?";
+		 }
+		 else if(searchType == 1) {
+			 sql = "select count(*) from product where isExcluded=? and name like ?";
+		 }
+		 else {
+			 sql = "select count(*) from product where isExcluded=?";
+		 }		 
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, isExcluded);
+			if(searchType == 1) {
+				pstmt.setString(2, "%"+searchContent+"%");
+			}
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			conn.close();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		 return 0; 
+		 
+		 
 	}
 	
 	
