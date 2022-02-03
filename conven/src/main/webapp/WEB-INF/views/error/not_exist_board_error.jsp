@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>작성자 불일치  에러</title>
+<title>존재하지 않는 게시물  에러</title>
 <style>
 	table{
 		margin:40px auto;		
@@ -26,7 +26,7 @@
 </head>
 <body>
 <table>
-	<tr><th>접속한 유저는 작성자가 아닙니다.</th></tr>
+	<tr><th>존재하지 않는 게시물입니다.</th></tr>
 	<tr><th><button id="ok_btn" onclick="location.href='/boards'">확인</button></th></tr>
 </table>
 

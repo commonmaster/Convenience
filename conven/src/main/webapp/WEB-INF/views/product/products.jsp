@@ -45,7 +45,7 @@ section {
 img{
 	width:100px;
 	height:100px;
-	object-fit: contain;
+	
 }
 
 .product_title_div{
@@ -76,7 +76,7 @@ img{
 	
 }
 
-#product_page_table {
+table {
 	margin: 0px auto;
 	
 }
@@ -115,6 +115,15 @@ select {
 	float:left;
 	margin-left:20px;
 	height:30px;
+}
+
+.board_btn{
+	padding:7.5px 15px;
+	border-radius:10px;
+	margin-left:10px;	
+	font-weight:bold;
+	background:#F8E0F1;
+	border:0px;	
 }
 
 .page_th{		
@@ -157,7 +166,7 @@ select {
 				<div class="product_box" id="${product_record.barcode }">
 
 					<div class="product_img_div">
-						<img src="/img/${product_record.imgUrl }">
+						<img src="/productImg/${product_record.barcode }">
 					</div>
 					<div class="product_title_div">
 						<span class="product_title_span"><b>${product_record.printNameUpperCase()}</b></span>
@@ -168,9 +177,11 @@ select {
 					</div>
 				</div>
 			</c:forEach>
-			
-			<c:if test="${pageInfo.hasRecords()}">
-				<table id="product_page_table">					
+				
+		
+				<table>
+						
+				<c:if test="${pageInfo.hasRecords()}">			
 						<tr>
 							<th class="page_th"><c:if test="${pageInfo.startPage > pageInfo.SHOW_PAGE_COUNT}">
 									<a href="products?pageNo=${pageInfo.startPage - 1}&category=${selectCategory}" class="page_str_a">[이전]</a>
@@ -187,9 +198,9 @@ select {
 									<a href="products?pageNo=${pageInfo.endPage + 1}&category=${selectCategory}" class="page_str_a">[다음]</a>
 								</c:if>
 						</tr>
-					
+				</c:if>	
 				</table>
-			</c:if>
+			
 			
 
 		</div>

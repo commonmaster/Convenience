@@ -11,8 +11,11 @@ public class 자유게시판페이지구성정보 {
 	private int startPage; // 현재 보이는 페이지상에서의 시작 페이지 ([예] 현재 페이지 3 -> 시작페이지 1, 현재페이지 66->시작:65)
 	private int endPage; // 현재 보이는 페이지상에서의 끝 페이지  ([예] 현재 페이지 3 -> 끝페이지 5, 현재페이지 66->끝:70)
 	private final int SHOW_PAGE_COUNT = 5; // 보여줄 페이지 갯수
+	private final int SHOW_RECORD_COUNT = 5; // 최대 10
+		
+	public 자유게시판페이지구성정보() {	}
 	
-	public 자유게시판페이지구성정보(int totalRecordCount, int currentPage, List<자유게시글> contents, int showRecordCount) {
+	public 자유게시판페이지구성정보(int totalRecordCount, int currentPage, List<자유게시글> contents) {
 		
 		this.totalRecordCount = totalRecordCount;
 		this.currentPage = currentPage;
@@ -24,9 +27,9 @@ public class 자유게시판페이지구성정보 {
 			endPage = 0;
 		}
 		else {
-			this.totalPageCount = this.totalRecordCount / showRecordCount;
+			this.totalPageCount = this.totalRecordCount / SHOW_RECORD_COUNT;
 			
-			if(this.totalRecordCount % showRecordCount != 0) {
+			if(this.totalRecordCount % SHOW_RECORD_COUNT != 0) {
 				this.totalPageCount++;
 			}
 			
@@ -85,6 +88,10 @@ public class 자유게시판페이지구성정보 {
 
 	public int getSHOW_PAGE_COUNT() {
 		return SHOW_PAGE_COUNT;
+	}
+	
+	public int getSHOW_RECORD_COUNT() {
+		return SHOW_RECORD_COUNT;
 	}
 
 	public void setEndPage(int endPage) {

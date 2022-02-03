@@ -1,7 +1,9 @@
 package config;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 
 @Configuration
@@ -30,5 +32,9 @@ public class BeanConfig {
 //	public 편의점업무DAO 편의점업무dao() { //@dao
 //		return new 편의점업무DAO();
 //	}
+	@Bean
+	public StandardServletMultipartResolver multipartResolver() {
+	    return new StandardServletMultipartResolver();
+	}
 	
 }

@@ -11,5 +11,7 @@ public interface 제품DAO {
 	int get제품갯수(int search_category);
 
 	제품 get제품(int barcode);
+	
+	void insert제품(제품 등록제품);
 
 }

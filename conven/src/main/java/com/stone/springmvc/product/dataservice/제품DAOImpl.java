@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+
 import com.stone.springmvc.product.common.제품;
 
 import config.DBUtil;
@@ -28,19 +29,19 @@ public class 제품DAOImpl implements 제품DAO {
 		String sql = "";
 		
 		if(search_category == 0){
-			sql = "select barcode, name, type, price, provider, imgUrl, intro from product order by barcode desc limit ?,?";
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where isExcluded=0 order by name desc limit ?,?";
 		}
 		else if(search_category == 1) {
-			sql = "select barcode, name, type, price, provider, imgUrl, intro from product where type='snack' order by barcode desc limit ?,?";
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where type='snack' and isExcluded=0 order by name desc limit ?,?";
 		}
 		else if(search_category == 2) {
-			sql = "select barcode, name, type, price, provider, imgUrl, intro from product where type='drink' order by barcode desc limit ?,?";
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where type='drink' and isExcluded=0 order by name desc limit ?,?";
 		}
 		else if(search_category == 3) {
-			sql = "select barcode, name, type, price, provider, imgUrl, intro from product where type='icecream' order by barcode desc limit ?,?";
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product where type='icecream' and isExcluded=0 order by name desc limit ?,?";
 		}
 		else {
-			sql = "select barcode, name, type, price, provider, imgUrl, intro from product order by barcode desc limit ?,?";
+			sql = "select barcode, name, type, price, provider, productImg, intro, isExcluded from product order by name desc limit ?,?";
 		}
 		
 		try {
@@ -70,19 +71,19 @@ public class 제품DAOImpl implements 제품DAO {
 		 
 		 String sql = "";
 		 if(search_category == 0) {
-			 sql = "select count(*) from product";
+			 sql = "select count(*) from product where isExcluded=0";
 		 }
 		 else if(search_category ==1) {
-			 sql = "select count(*) from product where type='snack'";
+			 sql = "select count(*) from product where type='snack' and isExcluded=0";
 		 }
 		 else if(search_category == 2) {
-			 sql = "select count(*) from product where type='drink'";
+			 sql = "select count(*) from product where type='drink' and isExcluded=0";
 		 }
 		 else if(search_category == 3) {
-			 sql = "select count(*) from product where type='icecream'";
+			 sql = "select count(*) from product where type='icecream' and isExcluded=0";
 		 }
 		 else {
-			 sql = "select count(*) from product";
+			 sql = "select count(*) from product where isExcluded=0";
 		 }
 		 
 		 try {
@@ -136,13 +137,53 @@ public class 제품DAOImpl implements 제품DAO {
 
 		제품객체.setBarcode(rs.getInt("barcode"));
 		제품객체.setName(rs.getString("name"));
-		제품객체.setType(rs.getString("type"));
+		제품객체.setType(rs.getInt("type"));
 		제품객체.setPrice(rs.getInt("price"));
 		제품객체.setProvider(rs.getString("provider"));
-		제품객체.setImgUrl(rs.getString("imgUrl"));	
+		제품객체.setProductImg(rs.getBytes("productImg"));
 		제품객체.setIntro(rs.getString("intro"));
+		제품객체.setIsExcluded(rs.getInt("isExcluded"));
+		
 		
 
 		return 제품객체;
 	}
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////
+	public void insert제품(제품 제품) {
+		
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "insert into product(barcode,name,type,price,provider,productImg,intro) values(?,?,?,?,?,?,?)";
+		
+		try {
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql);		
+			pstmt.setInt(1, 제품.getBarcode());
+			pstmt.setString(2, 제품.getName());
+			pstmt.setInt(3, 제품.getType());
+			pstmt.setInt(4, 제품.getPrice());
+			pstmt.setString(5, 제품.getProvider());
+			pstmt.setBytes(6, 제품.getProductImg());
+			pstmt.setString(7, 제품.getIntro());
+			
+			int success = pstmt.executeUpdate();
+			if(success > 0) {
+				conn.commit();
+			}
+			else {
+				conn.rollback();
+			}
+			conn.close();
+			
+		} catch (SQLException e) {
+			System.out.println("여기서 발생");
+			System.out.println(e.getMessage());
+		}		
+	}
+	
+	
 }

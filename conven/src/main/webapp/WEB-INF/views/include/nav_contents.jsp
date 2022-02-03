@@ -144,6 +144,9 @@ body {
 			<li><a href="/main">Home</a></li>			
 			<li><a href="/products">물품 안내</a></li>
 			<li><a href="/boards">자유게시판</a></li>
+			<!-- 관리자라면 to do -->
+			<li><a href="/manage">물품 관리</a></li>
+			
 		</ul>
 		</div>
 	</div>

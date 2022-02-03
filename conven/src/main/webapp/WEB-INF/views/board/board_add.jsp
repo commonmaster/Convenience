@@ -20,7 +20,7 @@
 	<section>
 		<div id="content_div">
 			<div align="center">
-			<img id="logo_img" src="img/logo_ju2.jpg">
+			<img id="logo_img" src="/img/logo_ju2.jpg">
 			</div>
 			<form action="board_add" method="post">
 			<table border="0" id="board_add_table">

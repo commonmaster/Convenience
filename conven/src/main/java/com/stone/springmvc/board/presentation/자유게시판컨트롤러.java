@@ -36,7 +36,11 @@ public class 자유게시판컨트롤러 {
 		}
 		// 값을 못받으면 자동으로 null값 반환
 
-		int 검색타입 = 0; // 검색타입 0: 그냥 검색
+		
+		// 검색타입 0: 그냥 검색
+		// 검색타입 1: 제목 검색
+		// 검색타입 2: 내용 검색
+		int 검색타입 = 0; 
 
 		if (searchType != null) {
 			검색타입 = searchType;
@@ -55,13 +59,14 @@ public class 자유게시판컨트롤러 {
 
 		ModelAndView mav = new ModelAndView();
 
+		// 화면을 볼 때 사용자 이름을 보여주기 위한 로직
 		String id = (String) session.getAttribute("conven_session_id");
 		if (id != null) {
 
 			Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);
 			mav.addObject("name", 회원.getName());
 		}
-
+		
 		mav.setViewName("board/boards");
 		mav.addObject("pageInfo", pageInfo);
 
@@ -150,6 +155,7 @@ public class 자유게시판컨트롤러 {
 
 				}
 
+				// 화면을 볼 때 사용자 이름을 보여주기 위한 로직
 				Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);
 				mav.addObject("name", 회원.getName());
 			}
@@ -159,7 +165,7 @@ public class 자유게시판컨트롤러 {
 
 			// 보낼 board 객체가 null 이라면
 		} else {
-			mav.setViewName("error");
+			mav.setViewName("not_exist_board_error");
 		}
 
 		return mav;
@@ -183,8 +189,9 @@ public class 자유게시판컨트롤러 {
 
 			mav.setViewName("board/board_modify");
 			mav.addObject("board", board);
+		
 		} else {
-			mav.setViewName("error");
+			mav.setViewName("not_exist_board_error");
 		}
 
 		return mav;

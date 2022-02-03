@@ -18,13 +18,15 @@ public class 제품관리서비스Impl implements 제품관리서비스 {
 	@Override
 	public 제품페이지구성정보 제품리스트출력서비스(int pageNo, int search_category) {
 
-		int showRecordCount = 4; // 보여줄 레코드수(3의 배수)(최대 9)
-		int startRow = (pageNo - 1) * showRecordCount;
+		제품페이지구성정보 info = new 제품페이지구성정보();
+		int 보여줄제품수 = info.getSHOW_RECORD_COUNT();
+		
+		int startRow = (pageNo - 1) * 보여줄제품수;
 
 		int totalRecordCount = 제품DAOImpl.get제품갯수(search_category);
-		List<제품> contents = 제품DAOImpl.get제품리스트(startRow, showRecordCount, search_category);
+		List<제품> contents = 제품DAOImpl.get제품리스트(startRow, 보여줄제품수, search_category);
 
-		return new 제품페이지구성정보(totalRecordCount, pageNo, contents, showRecordCount);
+		return new 제품페이지구성정보(totalRecordCount, pageNo, contents);
 	}
 
 	@Override
@@ -33,5 +35,11 @@ public class 제품관리서비스Impl implements 제품관리서비스 {
 		제품 product = 제품DAOImpl.get제품(barcode);
 
 		return product;
+	}
+	
+	@Override
+	public void 제품등록서비스(제품 등록제품) {
+		
+		제품DAOImpl.insert제품(등록제품);
 	}
 }

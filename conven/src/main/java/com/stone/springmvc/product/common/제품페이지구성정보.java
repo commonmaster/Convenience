@@ -11,8 +11,11 @@ public class 제품페이지구성정보 {
 	private int startPage; 
 	private int endPage;
 	private final int SHOW_PAGE_COUNT = 5; // 보여줄 페이지 갯수
+	private final int SHOW_RECORD_COUNT = 5; //보여줄 레코드수(3의 배수)(최대 9)
 	
-	public 제품페이지구성정보(int totalRecordCount, int currentPage, List<제품> contents, int showRecordCount) {
+	public 제품페이지구성정보() {	}
+	
+	public 제품페이지구성정보(int totalRecordCount, int currentPage, List<제품> contents) {
 		
 		this.totalRecordCount = totalRecordCount;
 		this.currentPage = currentPage;
@@ -24,9 +27,9 @@ public class 제품페이지구성정보 {
 			endPage = 0;
 		}
 		else {
-			this.totalPageCount = this.totalRecordCount / showRecordCount;
+			this.totalPageCount = this.totalRecordCount / SHOW_RECORD_COUNT;
 			
-			if(this.totalRecordCount % showRecordCount != 0) {
+			if(this.totalRecordCount % SHOW_RECORD_COUNT != 0) {
 				this.totalPageCount++;
 			}
 			
@@ -85,6 +88,10 @@ public class 제품페이지구성정보 {
 
 	public int getSHOW_PAGE_COUNT() {
 		return SHOW_PAGE_COUNT;
+	}	
+
+	public int getSHOW_RECORD_COUNT() {
+		return SHOW_RECORD_COUNT;
 	}
 
 	public void setEndPage(int endPage) {

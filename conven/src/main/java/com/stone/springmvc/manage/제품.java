@@ -1,4 +1,4 @@
-package com.stone.springmvc.product.common;
+package com.stone.springmvc.manage;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -6,7 +6,7 @@ public class 제품 {
 
 	private int barcode;
 	private String name;
-	private int type;
+	private String type;
 	private int price;
 	private String provider;
 	private byte[] productImg;
@@ -36,10 +36,10 @@ public class 제품 {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public int getPrice() {

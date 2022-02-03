@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	int searchType = (int) request.getAttribute("searchType");
+	
 %>
 
 <!DOCTYPE html>
@@ -216,8 +217,8 @@ tfoot th a {
 							<th colspan="5" class="page_th">
 								<c:if test="${pageInfo.startPage > pageInfo.SHOW_PAGE_COUNT}">
 									<a href="boards?pageNo=${pageInfo.startPage - 1}&searchType=${searchType}&searchContent=${searchContent}" class="page_str_a">[이전]</a>
-								</c:if> <c:forEach var="pNo" begin="${pageInfo.startPage}"
-									end="${pageInfo.endPage}">
+								</c:if> 
+								<c:forEach var="pNo" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
 									<c:if test="${pNo == pageInfo.currentPage}">
 										<a href="boards?pageNo=${pNo}&searchType=${searchType}&searchContent=${searchContent}" id="currentPage_a" class="page_num_a">${pNo}</a>
 									</c:if>
@@ -225,8 +226,7 @@ tfoot th a {
 										<a href="boards?pageNo=${pNo}&searchType=${searchType}&searchContent=${searchContent}"	class="page_num_a">${pNo}</a>
 									</c:if>
 								</c:forEach> <c:if test="${pageInfo.endPage < pageInfo.totalPageCount}">
-									<a
-										href="boards?pageNo=${pageInfo.endPage + 1}&searchType=${searchType}&searchContent=${searchContent}" class="page_str_a">[다음]</a>
+									<a href="boards?pageNo=${pageInfo.endPage + 1}&searchType=${searchType}&searchContent=${searchContent}" class="page_str_a">[다음]</a>
 								</c:if>
 						</tr>
 					</c:if>
