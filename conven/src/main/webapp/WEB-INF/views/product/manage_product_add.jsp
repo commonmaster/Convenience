@@ -7,8 +7,7 @@
 <title>제품등록(매니저)</title>
 <style>
 	section{
-		width: 1180px;
-		border:1px solid red;
+		width: 1180px;		
 		margin:0px auto;
 	}
 	
@@ -45,13 +44,16 @@
 	}
 	
 	.standard_btn{
-	padding:7.5px 15px;
-	border-radius:10px;
-	margin:0px 50px;
+	display:inline-block;
+	padding:15px;
+	border-radius:10px;	
+	width:200px;
 	font-weight:bold;
 	background:#F8E0F1;
 	border:0px;
 	font-size:1.2em;
+	margin: 0px 10px;
+	}
 	
 }
 	

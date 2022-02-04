@@ -7,8 +7,7 @@
 <title>제품 수정(매니저)</title>
 <style>	
 	section{
-		width: 1180px;
-		border:1px solid red;
+		width: 1180px;		
 		margin:0px auto;
 	}
 	
@@ -63,7 +62,7 @@
 <table>
 
 <tr><th colspan="2" rowspan="4"><img src="/productImg/${product.barcode }" 
-width="230" height="230" id="productImg"></th><th class="tit">바코드</th><td><input type="number" name="barcode" id="barcode" value="${product.name}" readonly="readonly"></td><td rowspan="5"><textarea rows="19" cols="50" name="intro" id="intro" placeholder="제품 소개(최대 100자)" maxlength="100">${product.intro}</textarea></tr>
+width="230" height="230" id="productImg"></th><th class="tit">바코드</th><td><input type="number" name="barcode" id="barcode" value="${product.barcode}" readonly="readonly"></td><td rowspan="5"><textarea rows="19" cols="50" name="intro" id="intro" placeholder="제품 소개(최대 100자)" maxlength="100">${product.intro}</textarea></tr>
 <tr><th class="tit">제품명</th><td><input type="text" name="name" id="name" autocomplete="off" value="${product.name}"></td></tr>
 <tr><th class="tit">종류</th><td><select name="type" id="type">   				
    			 	<option value="1">과자</option>

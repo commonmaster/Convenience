@@ -8,8 +8,7 @@
 <title>제품 정보(매니저)</title>
 <style>
 	section{
-		width: 1180px;
-		border:1px solid red;
+		width: 1180px;		
 		margin:0px auto;
 	}
 	
@@ -54,6 +53,7 @@
 	border:0px;
 	font-size:1.2em;
 	margin: 0px 10px;
+	}
 	
 }
 	
@@ -91,12 +91,12 @@
 		<c:set var="searchContent" value="${empty param.searchContent ? null :param.searchContent}"/>
 		<button onclick="location.href='/manage_product_modify?barcode=${product.barcode}&pageNo=${pageNo}&searchContent=${searchContent}'" class="standard_btn">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
 		
-		<c:if test="${product.isExcluded == 1}">
-			<a onclick="location.href='/manage_products_ex?pageNo=${pageNo}&searchContent=${searchContent }'" class="standard_btn">목록</a>
-		</c:if>
-		<c:if test="${product.isExcluded == 0}">
-			<a onclick="location.href='/manage_products?pageNo=${pageNo}&searchContent=${searchContent }'" class="standard_btn">목록</a>
-		</c:if>
+		
+			<a onclick="location.href='/manage_products?pageNo=${pageNo}&searchContent=${searchContent }'" class="standard_btn">판매목록</a>
+		
+		
+			<a onclick="location.href='/manage_products_ex?pageNo=${pageNo}&searchContent=${searchContent }'" class="standard_btn">제외목록</a>
+		
 	</th>
 </tr>
 

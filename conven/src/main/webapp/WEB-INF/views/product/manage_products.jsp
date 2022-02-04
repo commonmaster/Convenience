@@ -8,8 +8,7 @@
 <title>제품 리스트(매니저)</title>
 <style>
 	section{
-		width: 1180px;
-		border:1px solid red;
+		width: 1180px;	
 		margin:0px auto;
 	}
 
@@ -18,7 +17,7 @@
 	border: 0;}
 	
 	#btn_line{
-		padding:5px 10px;
+		padding:5px 10px 10px 0px;
 	}
 	
 	#back_main{
@@ -103,7 +102,7 @@
 
 <table>
 <thead>
-<tr><th colspan="5"><img id="logo_img" src="/img/logo_ju_nosale.jpg" width="450px"></th></tr>
+<tr><th colspan="5"><img id="logo_img" src="/img/logo_ju_sale.jpg" width="450px"></th></tr>
 <tr><td colspan="5" align="right" id="btn_line"><a id="back_main" onclick="location.href='/manage'">관리 메인</a></td></tr>
 <tr><th width="130px" class="tit">바코드</th><th width="380px" class="tit">제품명</th><th width="100px" class="tit">종류</th><th width="90px" class="tit">가격</th><th width="240px" class="tit">제조사</th></tr></thead>
 <tfoot>

@@ -9,8 +9,7 @@
 <style>
 
 	section{
-		width: 1180px;
-		border:1px solid red;
+		width: 1180px;		
 		margin:0px auto;
 	}
 
@@ -19,7 +18,7 @@
 	border: 0;}
 	
 	#btn_line{
-		padding:5px 10px;
+		padding:5px 10px 10px 0px;
 	}
 	
 	#back_main{

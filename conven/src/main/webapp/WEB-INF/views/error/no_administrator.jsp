@@ -26,7 +26,7 @@
 </head>
 <body>
 <table>
-	<tr><th>자유게시판 삭제를 실패했습니다.</th></tr>
+	<tr><th>관리자가 아닙니다.</th></tr>
 	<tr><th><button id="ok_btn" onclick="location.href='/boards'">확인</button></th></tr>
 </table>
 </body>

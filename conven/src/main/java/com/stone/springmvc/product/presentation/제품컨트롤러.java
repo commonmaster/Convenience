@@ -91,7 +91,7 @@ public class 제품컨트롤러 {
 		if (isAdministrator(session)) {
 			return "product/manage";
 		}
-		return "no_administrator";
+		return "error/no_administrator";
 	}
 
 	@GetMapping("/manage_product_add")
@@ -100,7 +100,7 @@ public class 제품컨트롤러 {
 		if (isAdministrator(session)) {
 			return "product/manage_product_add";
 		}
-		return "no_administrator";
+		return "error/no_administrator";
 	}
 
 	@PostMapping("/manage_product_add")
@@ -127,9 +127,9 @@ public class 제품컨트롤러 {
 			제품 찾은제품 = 제품관리서비스Impl.제품상세정보출력서비스(barcode);
 			mav.setViewName("product/manage_product");
 			mav.addObject("product", 찾은제품);
+		} else {
+			mav.setViewName("error/no_administrator");
 		}
-		mav.setViewName("no_administrator");
-
 		return mav;
 
 	}
@@ -169,8 +169,9 @@ public class 제품컨트롤러 {
 			// 검색타입과 검색 내용을 넘겨서 페이지 이동시에도 보존
 			mav.addObject("searchType", 검색타입);
 			mav.addObject("searchContent", searchContent);
+		} else {
+			mav.setViewName("error/no_administrator");
 		}
-		mav.setViewName("no_administrator");
 
 		return mav;
 	}
@@ -211,8 +212,9 @@ public class 제품컨트롤러 {
 			// 검색타입과 검색 내용을 넘겨서 페이지 이동시에도 보존
 			mav.addObject("searchType", 검색타입);
 			mav.addObject("searchContent", searchContent);
+		} else {
+			mav.setViewName("error/no_administrator");
 		}
-		mav.setViewName("no_administrator");
 
 		return mav;
 	}
@@ -228,9 +230,9 @@ public class 제품컨트롤러 {
 
 			mav.setViewName("product/manage_product_modify");
 			mav.addObject("product", 찾은제품);
+		} else {
+			mav.setViewName("error/no_administrator");
 		}
-		mav.setViewName("no_administrator");
-		
 		return mav;
 	}
 
