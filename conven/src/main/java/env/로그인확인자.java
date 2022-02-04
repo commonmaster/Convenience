@@ -32,21 +32,18 @@ public class 로그인확인자 extends HandlerInterceptorAdapter{
 	        if(url == null) {
 	        	url = "/main";
 	        }
-	        if(query != null){ //주소가 board?no=34&page=33
-
-	            url = url + "?" + query;
-
-	        }
-			
-	        HttpSession httpSession = request.getSession();
-	        System.out.println("최종 url: " + url);
-	        httpSession.setAttribute("prev_url", url);
 	        
-	        response.sendRedirect("/login");
+	        if(query != null){ //주소가 board?no=34&page=33
+	            url = url + "?" + query;
+	        }			
+	       
+	        System.out.println("최종 url: " + url);	       
+	        
+	        request.setAttribute("prev_url", url);
+	        RequestDispatcher rd = request.getRequestDispatcher("/login");	        
+	        rd.forward(request, response);
 			
-			return 로그인중;
-			
-			
+			return 로그인중;			
 		}
 		
 		return 로그인중;

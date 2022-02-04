@@ -10,14 +10,11 @@
 
 <style>
 
-section {
-	
+section {	
 	padding:20px;
 	width: 1180px;
 	height:730px;
-	margin:0px auto;
-	border:1px solid red;	
-	
+	margin:0px auto;	
 }
 
 #content_div{

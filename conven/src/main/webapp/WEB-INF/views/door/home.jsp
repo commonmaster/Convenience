@@ -14,14 +14,11 @@ section {
 	
 	padding:20px;
 	width: 1180px;	
-	margin:0px auto;
-	border:1px solid red;	
-	
+	margin:0px auto;	
 }
 
 #content_div{
-	width:1160px;
-	border:1px solid blue;
+	width:1160px;	
 }
 
 #logo_img{

@@ -71,7 +71,7 @@ public class 회원관리컨트롤러 {
 		ModelAndView mav = new ModelAndView();
 
 		String id = (String) session.getAttribute("conven_session_id");
-		System.out.println("id:" + id);
+		//System.out.println("id:" + id);
 		if (id == null) {
 			mav.setViewName("error");
 		} else {

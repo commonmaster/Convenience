@@ -21,10 +21,13 @@ public class 로그인아웃컨트롤러 {
 	com.stone.springmvc.member.service.회원관리서비스 회원관리서비스;
 
 	@GetMapping("/login")
-	public ModelAndView 로그인화면을준비하다(HttpSession session) {
+	public ModelAndView 로그인화면을준비하다(HttpSession session, HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();
-
+		
+		//System.out.println("요청명 로그인 준비: " + request.getAttribute("prev_url"));
+		
+		String prev_url = (String)request.getAttribute("prev_url");
 		String id = (String) session.getAttribute("conven_session_id");
 		// 이미 로그인되어 있다면 로그인화면으로 이동
 		if (id != null) {
@@ -33,16 +36,27 @@ public class 로그인아웃컨트롤러 {
 		} else {
 
 			mav.setViewName("login/login");
+			mav.addObject("prev_url", prev_url);
 		}
 
 		return mav;
 	}
 
 	@PostMapping("/login")
-	public ModelAndView 로그인하다(String id, String password, HttpSession session) {
+	public ModelAndView 로그인하다(String id, String password, HttpSession session, String prev_url) {
 
 		ModelAndView mav = new ModelAndView();
 
+//		if(prev_url == null) {
+//			System.out.println("주소값 null");
+//		}
+//		else if(prev_url.trim().equals("")) {
+//			System.out.println("주소값 빈칸");
+//		}
+//		else {
+//			System.out.println("도대체 머냐");
+//		}
+		
 		if (id != null && password != null) {
 
 			int result = 로그인업무서비스.로그인서비스(id, password);
@@ -51,10 +65,12 @@ public class 로그인아웃컨트롤러 {
 			if (result == 1) {
 					
 				session.setAttribute("conven_session_id", id);
-				String prev_url = (String)session.getAttribute("prev_url");
-				if(prev_url == null) {
+				
+				
+				if(prev_url == null || prev_url.trim().equals("")) {
 					prev_url = "/main";
-				}
+					
+				}				
 				mav.setViewName("redirect:" + prev_url);
 				
 			// 아이디나 비밀번호가 일치하지 않을 경우	

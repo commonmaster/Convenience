@@ -71,8 +71,6 @@ public class 제품컨트롤러 {
 		return mav;
 	}
 
-	/////////////////////////////////////////////////////////////////////////////
-
 	@GetMapping("/productImg/{바코드}") // 예 /profile/1
 	public ModelAndView 제품사진을주다(@PathVariable("바코드") int barcode) {
 		ModelAndView mav = new ModelAndView();
@@ -85,145 +83,192 @@ public class 제품컨트롤러 {
 		return mav;
 	}
 
-	@GetMapping("/manage_product_add")
-	public String 제품등록화면을준비하다() {
+	/////////////////////////////////////////////////////////////////////////////
 
-		return "product/manage_product_add";
+	@GetMapping("/manage")
+	String 매니저제품관리화면을준비하다(HttpSession session) {
+
+		if (isAdministrator(session)) {
+			return "product/manage";
+		}
+		return "no_administrator";
 	}
-	
+
+	@GetMapping("/manage_product_add")
+	public String 제품등록화면을준비하다(HttpSession session) {
+
+		if (isAdministrator(session)) {
+			return "product/manage_product_add";
+		}
+		return "no_administrator";
+	}
+
 	@PostMapping("/manage_product_add")
 	public ModelAndView 제품을등록하다(제품 등록제품) {
 
 		ModelAndView mav = new ModelAndView();
 
-		제품관리서비스Impl.제품등록서비스(등록제품);
-		mav.setViewName("redirect:/manage_product/"+등록제품.getBarcode());
+		int success = 제품관리서비스Impl.제품등록서비스(등록제품);
+		if (success > 0) {
+			mav.setViewName("redirect:/manage_product?barcode=" + 등록제품.getBarcode());
+		} else {
+			mav.setViewName("error/manage_insert_fail");
+		}
+
 		return mav;
 	}
 
 	@GetMapping("/manage_product")
-	public ModelAndView 매니저제품상세화면을준비하다(int barcode) {
-		
-		ModelAndView mav = new ModelAndView();		
-		제품 찾은제품 = 제품관리서비스Impl.제품상세정보출력서비스(barcode);
-		mav.setViewName("product/manage_product");
-		mav.addObject("product", 찾은제품);
-		
+	public ModelAndView 매니저제품상세화면을준비하다(int barcode, HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+
+		if (isAdministrator(session)) {
+			제품 찾은제품 = 제품관리서비스Impl.제품상세정보출력서비스(barcode);
+			mav.setViewName("product/manage_product");
+			mav.addObject("product", 찾은제품);
+		}
+		mav.setViewName("no_administrator");
+
 		return mav;
-		
+
 	}
-	
+
 	@GetMapping("/manage_products")
-	public ModelAndView 매니저물품화면을준비하다(Integer pageNo, String searchContent, HttpSession session) {
-
-		int requestPageNo = 1;
-		if (pageNo != null) {
-			requestPageNo = pageNo;
-		}
-		// 값을 못받으면 자동으로 null값 반환		
-		// 검색타입 0: 그냥 검색
-		// 검색타입 1: 제목 검색
-		
-		int 검색타입 = 0; 
-
-		if (searchContent != null) {			
-			// 검색 내용이 빈칸이면 그냥 모두 검색으로
-			if (searchContent.trim().equals("")) {
-				검색타입 = 0;
-			}
-			else {
-			검색타입 = 1;
-			}
-		}
-		else {
-			검색타입 = 0;
-		}
-		
-		System.out.println("검색타입: " + 검색타입);
-		제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 0, 검색타입, searchContent); // 0:판매중
+	public ModelAndView 매니저제품화면을준비하다(Integer pageNo, String searchContent, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
-		// 화면을 볼 때 사용자 이름을 보여주기 위한 로직
-		String id = (String) session.getAttribute("conven_session_id");
-		if (id != null) {
+		if (isAdministrator(session)) {
+			int requestPageNo = 1;
+			if (pageNo != null) {
+				requestPageNo = pageNo;
+			}
+			// 값을 못받으면 자동으로 null값 반환
+			// 검색타입 0: 그냥 검색
+			// 검색타입 1: 제목 검색
 
-			Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);
-			mav.addObject("name", 회원.getName());
+			int 검색타입 = 0;
+
+			if (searchContent != null) {
+				// 검색 내용이 빈칸이면 그냥 모두 검색으로
+				if (searchContent.trim().equals("")) {
+					검색타입 = 0;
+				} else {
+					검색타입 = 1;
+				}
+			} else {
+				검색타입 = 0;
+			}
+
+			제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 0, 검색타입, searchContent); // 0:판매중
+
+			mav.setViewName("product/manage_products");
+			mav.addObject("pageInfo", pageInfo);
+
+			// 검색타입과 검색 내용을 넘겨서 페이지 이동시에도 보존
+			mav.addObject("searchType", 검색타입);
+			mav.addObject("searchContent", searchContent);
 		}
-		
-		mav.setViewName("product/manage_products");
-		mav.addObject("pageInfo", pageInfo);	
-
-		// 검색타입과 검색 내용을 넘겨서 페이지 이동시에도 보존
-		mav.addObject("searchType", 검색타입);
-		mav.addObject("searchContent", searchContent);
+		mav.setViewName("no_administrator");
 
 		return mav;
 	}
-	
+
 	@GetMapping("/manage_products_ex")
-	public ModelAndView 매니저제외물품화면을준비하다(Integer pageNo, String searchContent, HttpSession session) {
-
-		int requestPageNo = 1;
-		if (pageNo != null) {
-			requestPageNo = pageNo;
-		}
-		// 값을 못받으면 자동으로 null값 반환		
-		// 검색타입 0: 그냥 검색
-		// 검색타입 1: 제목 검색
-		
-		int 검색타입 = 0; 
-
-		if (searchContent != null) {			
-			// 검색 내용이 빈칸이면 그냥 모두 검색으로
-			if (searchContent.trim().equals("")) {
-				검색타입 = 0;
-			}
-			else {
-			검색타입 = 1;
-			}
-		}
-		else {
-			검색타입 = 0;
-		}
-		
-		제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 1, 검색타입, searchContent); // 1:판매제외
+	public ModelAndView 매니저제외제품화면을준비하다(Integer pageNo, String searchContent, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
-		// 화면을 볼 때 사용자 이름을 보여주기 위한 로직
-		String id = (String) session.getAttribute("conven_session_id");
-		if (id != null) {
+		if (isAdministrator(session)) {
 
-			Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);
-			mav.addObject("name", 회원.getName());
+			int requestPageNo = 1;
+			if (pageNo != null) {
+				requestPageNo = pageNo;
+			}
+			// 값을 못받으면 자동으로 null값 반환
+			// 검색타입 0: 그냥 검색
+			// 검색타입 1: 제목 검색
+
+			int 검색타입 = 0;
+
+			if (searchContent != null) {
+				// 검색 내용이 빈칸이면 그냥 모두 검색으로
+				if (searchContent.trim().equals("")) {
+					검색타입 = 0;
+				} else {
+					검색타입 = 1;
+				}
+			} else {
+				검색타입 = 0;
+			}
+
+			제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 1, 검색타입, searchContent); // 1:판매제외
+
+			mav.setViewName("product/manage_products_ex");
+			mav.addObject("pageInfo", pageInfo);
+
+			// 검색타입과 검색 내용을 넘겨서 페이지 이동시에도 보존
+			mav.addObject("searchType", 검색타입);
+			mav.addObject("searchContent", searchContent);
 		}
-		
-		mav.setViewName("product/manage_products_ex");
-		mav.addObject("pageInfo", pageInfo);
-
-		// 검색타입과 검색 내용을 넘겨서 페이지 이동시에도 보존
-		mav.addObject("searchType", 검색타입);
-		mav.addObject("searchContent", searchContent);
+		mav.setViewName("no_administrator");
 
 		return mav;
 	}
-	
+
 	@GetMapping("/manage_product_modify")
-	public ModelAndView 매니저제품수정화면을준비하다(int barcode) {
-		
+	public ModelAndView 매니저제품수정화면을준비하다(int barcode, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
-		제품 찾은제품 = 제품관리서비스Impl.제품상세정보출력서비스(barcode);
-		mav.setViewName("product/manage_product_modify");
-		mav.addObject("product", 찾은제품);
+
+		if (isAdministrator(session)) {
+
+			제품 찾은제품 = 제품관리서비스Impl.제품상세정보출력서비스(barcode);
+
+			mav.setViewName("product/manage_product_modify");
+			mav.addObject("product", 찾은제품);
+		}
+		mav.setViewName("no_administrator");
 		
-		return mav;	
+		return mav;
 	}
-	
-	@GetMapping("/manage")
-	String 물품관리화면을준비하다() {
-		
-		return "product/manage";
+
+	@PostMapping("/manage_product_modify")
+	public ModelAndView 매니저제품수정하다(제품 수정할제품, Integer isImgChange) {
+
+		ModelAndView mav = new ModelAndView();
+
+		boolean imgChange = false;
+
+		if (isImgChange != null) {
+			if (isImgChange == 1) {
+				imgChange = true;
+			}
+		}
+
+		int success = 제품관리서비스Impl.제품수정서비스(수정할제품, imgChange);
+		if (success > 0) {
+			mav.setViewName("redirect:/manage_product?barcode=" + 수정할제품.getBarcode());
+		} else {
+			mav.setViewName("error/manage_update_fail");
+		}
+
+		return mav;
 	}
+
+	// 관리자인지 확인
+	private boolean isAdministrator(HttpSession session) {
+
+		boolean result = false;
+
+		String id = (String) session.getAttribute("conven_session_id");
+		if (id != null) {
+			if (id.equals("admin")) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
 }

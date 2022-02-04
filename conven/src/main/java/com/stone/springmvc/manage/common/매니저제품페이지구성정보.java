@@ -1,6 +1,8 @@
-package com.stone.springmvc.product.common;
+package com.stone.springmvc.manage.common;
 
 import java.util.List;
+
+import com.stone.springmvc.product.common.제품;
 
 public class 매니저제품페이지구성정보 {
 

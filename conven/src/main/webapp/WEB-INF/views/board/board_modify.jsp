@@ -58,6 +58,7 @@ thead .board_head_line{
 	background:#F8E0F1;
 	font-weight:bold;
 	border:0px;
+	font-size:0.5em;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -70,9 +71,10 @@ thead .board_head_line{
 			<div align="center">
 			<img id="logo_img" src="/img/logo_ju2.jpg">
 			</div>
-			<form action="board_modify?no=${board.no}&pageNo=${param.pageNo}" method="post">
+			<form action="/board_modify" method="post">
+			<input type="hidden" name="no" value="${param.no}">
 			<table border="0" id="board_add_table">
-				<caption>자유게시글 수정<span id="board_btn_span"><input type="submit" value="수정" class="board_btn"><button class="board_btn" onclick="history.back()">취소</button></span></caption>
+				<caption>자유게시글 수정<span id="board_btn_span"><input type="submit" value="수정" class="board_btn"><a class="board_btn" onclick="history.back()">취소</a></span></caption>
 				<thead>
 					<tr>
 						<td class="board_head_line" width="1050px"></td>

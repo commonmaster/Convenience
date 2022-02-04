@@ -76,6 +76,7 @@
 		<%} %>	
 		</span></td></tr>
 	</table>
+	<input type="hidden" value="${prev_url}" name="prev_url">
   </form>
   
 </body>

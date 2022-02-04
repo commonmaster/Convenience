@@ -186,9 +186,6 @@ public class 자유게시판컨트롤러 {
 			} else {
 				mav.setViewName("error/not_same_writer_error");
 			}
-
-			mav.setViewName("board/board_modify");
-			mav.addObject("board", board);
 		
 		} else {
 			mav.setViewName("not_exist_board_error");
@@ -198,17 +195,23 @@ public class 자유게시판컨트롤러 {
 	}
 
 	@PostMapping("/board_modify")
-	public ModelAndView 자유게시글을수정하다(자유게시글 board, Integer pageNo, HttpSession session) {
-
-		String id = (String) session.getAttribute("conven_session_id");
-
-		자유게시판관리서비스Impl.자유게시판수정서비스(board);
-		Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);
+	public ModelAndView 자유게시글을수정하다(자유게시글 board, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/board?no=" + board.getNo() + "&pageNo=" + pageNo);
-		mav.addObject("name", 회원.getName());
+		
+		String id = (String) session.getAttribute("conven_session_id");
 
+		int success = 자유게시판관리서비스Impl.자유게시판수정서비스(board);
+		
+		if(success > 0) {
+			Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);		
+			mav.setViewName("redirect:/board?no=" + board.getNo());
+			mav.addObject("name", 회원.getName());
+		}
+		else {
+			mav.setViewName("error/board_update_fail");
+		}
+		
 		return mav;
 	}
 
@@ -221,9 +224,8 @@ public class 자유게시판컨트롤러 {
 		자유게시글 board = 자유게시판관리서비스Impl.자유게시판상세서비스(no);
 		
 		if (id.equals(board.getAuthorId())) {
-			자유게시판관리서비스Impl.자유게시판삭제서비스(id, no);
+			자유게시판관리서비스Impl.자유게시판삭제서비스(no);
 			mav.setViewName("redirect:/boards");
-
 		}
 		else {
 			mav.setViewName("error/not_same_writer_error");
@@ -233,10 +235,7 @@ public class 자유게시판컨트롤러 {
 			Member 회원 = 회원관리서비스Impl.회원찾기서비스(id);
 			mav.addObject("name", 회원.getName());
 		}
-
 		return mav;
 	}
-	
-	
 
 }

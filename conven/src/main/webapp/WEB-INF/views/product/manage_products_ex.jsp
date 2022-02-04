@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>제품 리스트(매니저)</title>
 <style>
+
 	section{
 		width: 1180px;
 		border:1px solid red;
@@ -92,37 +93,38 @@
 		font-weight: bold;
 	}
 	
+		
 	
 }
 	
 </style>
 </head>
 <body>
-
 <section>
 
 <table>
 <thead>
 <tr><th colspan="5"><img id="logo_img" src="/img/logo_ju_nosale.jpg" width="450px"></th></tr>
 <tr><td colspan="5" align="right" id="btn_line"><a id="back_main" onclick="location.href='/manage'">관리 메인</a></td></tr>
-<tr><th width="130px" class="tit">바코드</th><th width="380px" class="tit">제품명</th><th width="100px" class="tit">종류</th><th width="90px" class="tit">가격</th><th width="240px" class="tit">제조사</th></tr></thead>
+<tr><th width="130px" class="tit">바코드</th><th width="380px" class="tit">제품명</th><th width="100px" class="tit">종류</th><th width="90px" class="tit">가격</th><th width="240px" class="tit">제조사</th></tr>
+</thead>
 <tfoot>
 <tr><td colspan="5" id="contents_p_space"></td></tr>
 <c:if test="${pageInfo.hasRecords()}">
 	<tr>
 		<th colspan="5" class="page_th">
 			<c:if test="${pageInfo.startPage > pageInfo.SHOW_PAGE_COUNT}">
-				<a href="manage_products?pageNo=${pageInfo.startPage - 1}&searchContent=${searchContent}" class="page_str_a">[이전]</a>
+				<a href="manage_products_ex?pageNo=${pageInfo.startPage - 1}&searchContent=${searchContent}" class="page_str_a">[이전]</a>
 			</c:if> 
 			<c:forEach var="pNo" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
 				<c:if test="${pNo == pageInfo.currentPage}">
-					<a href="manage_products?pageNo=${pNo}&searchContent=${searchContent}" id="currentPage_a" class="page_num_a">${pNo}</a>
+					<a href="manage_products_ex?pageNo=${pNo}&searchContent=${searchContent}" id="currentPage_a" class="page_num_a">${pNo}</a>
 				</c:if>
 				<c:if test="${pNo != pageInfo.currentPage}">
-					<a href="manage_products?pageNo=${pNo}&searchContent=${searchContent}"	class="page_num_a">${pNo}</a>
+					<a href="manage_products_ex?pageNo=${pNo}&searchContent=${searchContent}"	class="page_num_a">${pNo}</a>
 				</c:if>
 				</c:forEach> <c:if test="${pageInfo.endPage < pageInfo.totalPageCount}">
-					<a href="manage_products?pageNo=${pageInfo.endPage + 1}&searchContent=${searchContent}" class="page_str_a">[다음]</a>
+					<a href="manage_products_ex?pageNo=${pageInfo.endPage + 1}&searchContent=${searchContent}" class="page_str_a">[다음]</a>
 				</c:if>
 	</tr>
 </c:if>
@@ -131,7 +133,7 @@
 </tfoot>
 <tbody>	
 	<c:if test="${pageInfo.hasNoRecords()}">
-		<th colspan="5" id="hasNoRecord" height="300px">판매등록 제품이 없습니다.</th>
+		<th colspan="5" id="hasNoRecord" height="300px">판매중지 제품이 없습니다.</th>
 	</c:if>
 	<c:forEach var="product_record" items="${pageInfo.contents}">
 		<tr>
@@ -154,14 +156,13 @@
 </table>
 
 <div align="center">
-	<form action="/manage_products">
+	<form action="/manage_products_ex">
 		<input type="text" name="searchContent" placeholder="제품명 검색" value=${searchContent}>&nbsp;<input type="submit" value="검색" id="search_btn" >
 	</form>
 </div>
-
 </section>
-</body>
 
+</body>
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>

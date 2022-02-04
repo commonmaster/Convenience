@@ -32,12 +32,13 @@ public class 자유게시판관리서비스Impl implements 자유게시판관리
 	}
 	
 	@Override
-	public void 자유게시판등록서비스(자유게시글 작성된게시글) {
+	public int 자유게시판등록서비스(자유게시글 작성된게시글) {
 		
 		if(작성된게시글.getTitle().trim().isEmpty()) {
 			작성된게시글.setTitle("No Title");
 		}
-		자유게시판DAOImpl.insert자유게시글(작성된게시글);
+		
+		return 자유게시판DAOImpl.insert자유게시글(작성된게시글);
 	}
 	
 	@Override
@@ -55,25 +56,16 @@ public class 자유게시판관리서비스Impl implements 자유게시판관리
 	}
 	
 	@Override
-	public void 자유게시판수정서비스(자유게시글 게시글) {
+	public int 자유게시판수정서비스(자유게시글 게시글) {
 		
-		자유게시판DAOImpl.update자유게시글(게시글);
+		return 자유게시판DAOImpl.update자유게시글(게시글);
 	}
 	
 	
 	@Override
-	public boolean 자유게시판삭제서비스(String id, int 게시글번호) {
-		자유게시글 board = 자유게시판DAOImpl.get자유게시글(게시글번호);
-		if(id.equals(board.getAuthorId())) {
-			// todo
-		}
-		else {
-			
-		}
-		
-		자유게시판DAOImpl.delete자유게시글(게시글번호);
-		
-		return true;
+	public int 자유게시판삭제서비스(int 게시글번호) {
+				
+		return 자유게시판DAOImpl.delete자유게시글(게시글번호);
 	}
 	
 	

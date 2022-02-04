@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stone.springmvc.product.common.매니저제품페이지구성정보;
+import com.stone.springmvc.manage.common.매니저제품페이지구성정보;
 import com.stone.springmvc.product.common.제품;
 import com.stone.springmvc.product.common.제품페이지구성정보;
 import com.stone.springmvc.product.dataservice.제품DAO;
@@ -39,9 +39,9 @@ public class 제품관리서비스Impl implements 제품관리서비스 {
 	}
 	//////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public void 제품등록서비스(제품 등록제품) {
+	public int 제품등록서비스(제품 등록제품) {
 		
-		제품DAOImpl.insert제품(등록제품);
+		return 제품DAOImpl.insert제품(등록제품);
 	}
 	
 	@Override
@@ -56,6 +56,13 @@ public class 제품관리서비스Impl implements 제품관리서비스 {
 		List<제품> contents = 제품DAOImpl.get매니저제품리스트(startRow, 보여줄제품수, 제외유무, 검색타입, 검색내용);
 		
 		return new 제품페이지구성정보(totalRecordCount, 페이지번호, contents);
+	}
+	
+	@Override
+	public int 제품수정서비스(제품 수정할제품, boolean 이미지갱신) {
+		
+		return 제품DAOImpl.update제품(수정할제품, 이미지갱신);
+		
 	}
 	
 	

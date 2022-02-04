@@ -8,13 +8,11 @@
 <title>자유게시판 상세</title>
 <link rel="stylesheet" type="text/css" href="/css/board.css" />
 <style>
-section {
-	
+section {	
 	padding:20px;
 	width: 1180px;
 	height:700px;
-	margin:0px auto;
-	border:1px solid red;	
+	margin:0px auto;	
 	
 }
 </style>

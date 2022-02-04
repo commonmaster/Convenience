@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,11 +116,17 @@
 				<span id="email_message" class="message"></span>
 			</td>
 		</tr>
+		
 		<tr>
-			<td align="center"><input type="submit" id="submit_btn" value="정보 변경"><br><br><br>
-								<a href="/withdraw" target="_parent">회원 탈퇴</a>
+			
+			<td align="center">
+				<input type="submit" id="submit_btn" value="정보 변경"><br><br><br>
+				<c:if test="${member.id != 'admin'}">
+					<a href="/withdraw" target="_parent">회원 탈퇴</a>
+				</c:if>
 			</td>
-		<tr>	
+		</tr>	
+	
 	</table>
   </form>
   

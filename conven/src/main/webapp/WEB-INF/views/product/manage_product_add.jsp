@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>제품등록(매니저)</title>
 <style>
+	section{
+		width: 1180px;
+		border:1px solid red;
+		margin:0px auto;
+	}
 	
 	table{
 		margin:0px auto;
@@ -54,7 +59,8 @@
 </style>
 </head>
 <body>
-<div align="center" id="logo_div"><img id="logo_img" src="/img/logo_ju2.jpg" style="vertical-align:middle;"><span>제품 등록</span></div>
+<section>
+<div align="center" id="logo_div"><img id="logo_img" src="/img/logo_ju_add.jpg" width="450px" style="vertical-align:middle;"></div>
 <form action="/manage_product_add" method="post" enctype="multipart/form-data" onsubmit="return checkSubmit()">
 <table>
 
@@ -73,6 +79,7 @@
 </table>
 
 </form>
+</section>
 </body>
 <script>
 var correctFile = false;

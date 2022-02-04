@@ -127,7 +127,7 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 	}
 
 	@Override
-	public void insert자유게시글(자유게시글 board) {
+	public int insert자유게시글(자유게시글 board) {
 
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
@@ -151,17 +151,19 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 				conn.commit();
 			} else {
 				conn.rollback();
+				return success;
 			}
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return 1;
 	}
 
 	@Override
 	public 자유게시글 get자유게시글(int no) {
 
-		Connection conn = getConnection();
+		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -216,7 +218,7 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 	}
 
 	@Override
-	public void update자유게시글(자유게시글 board) {
+	public int update자유게시글(자유게시글 board) {
 
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
@@ -238,16 +240,19 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 				conn.commit();
 			} else {
 				conn.rollback();
+				return success;
 			}
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		return 1;
 
 	}
 
 	@Override
-	public void delete자유게시글(int no) {
+	public int delete자유게시글(int no) {
 
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
@@ -267,11 +272,14 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 				conn.commit();
 			} else {
 				conn.rollback();
+				return success;
 			}
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		return 1;
 	}
 
 	private Timestamp toTimestamp(Date date) {
@@ -279,25 +287,6 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 		return new Timestamp(date.getTime());
 	}
 
-	private Connection getConnection() {
-
-		Connection conn = null;
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			conn = DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
-
-			return conn;
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버를 찾을 수 없습니다.");
-		}
-
-		return null;
-
-	}
+	
 
 }

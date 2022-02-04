@@ -10,14 +10,14 @@ public interface 자유게시판DAO {
 
 	int get게시글갯수(int s_type, String search_content);
 
-	void insert자유게시글(자유게시글 board);
+	int insert자유게시글(자유게시글 board);
 
 	자유게시글 get자유게시글(int no);
 
 	int 자유게시글조회수증가(int no);
 
-	void update자유게시글(자유게시글 board);
+	int update자유게시글(자유게시글 board);
 
-	void delete자유게시글(int no);
+	int delete자유게시글(int no);
 
 }

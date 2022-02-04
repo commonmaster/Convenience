@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -152,7 +153,7 @@ public class 제품DAOImpl implements 제품DAO {
 	
 	
 	//////////////////////////////////////////////////////////////////////////////
-	public void insert제품(제품 제품) {
+	public int insert제품(제품 제품) {
 		
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
@@ -176,6 +177,7 @@ public class 제품DAOImpl implements 제품DAO {
 			}
 			else {
 				conn.rollback();
+				return success;
 			}
 			conn.close();
 			
@@ -183,6 +185,7 @@ public class 제품DAOImpl implements 제품DAO {
 			System.out.println("여기서 발생");
 			System.out.println(e.getMessage());
 		}		
+		return 1;
 	}
 	
 	@Override
@@ -268,9 +271,55 @@ public class 제품DAOImpl implements 제품DAO {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		 return 0; 
-		 
-		 
+		 return 0; 		 
+	}
+	
+	@Override
+	public int update제품(제품 수정할제품, boolean 이미지갱신) {
+	
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+
+		String sql = "";
+		if(이미지갱신) {
+			sql ="update product set name=?, type=?, price=?, provider=?, isExcluded=?, intro=?, productImg=? where barcode=?";
+		}
+		else {
+			sql ="update product set name=?, type=?, price=?, provider=?, isExcluded=?, intro=? where barcode=?";
+		}
+
+		try {
+
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, 수정할제품.getName());
+			pstmt.setInt(2, 수정할제품.getType());
+			pstmt.setInt(3, 수정할제품.getPrice());
+			pstmt.setString(4, 수정할제품.getProvider());
+			pstmt.setInt(5, 수정할제품.getIsExcluded());
+			pstmt.setString(6, 수정할제품.getIntro());
+			pstmt.setInt(7, 수정할제품.getBarcode());
+			if(이미지갱신) {
+				pstmt.setBytes(7, 수정할제품.getProductImg());
+				pstmt.setInt(8, 수정할제품.getBarcode());
+			}
+			
+
+			int success = pstmt.executeUpdate();
+
+			if (success > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+				return success;
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return 1;
+
 	}
 	
 	
