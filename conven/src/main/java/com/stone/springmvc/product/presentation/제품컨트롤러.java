@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.stone.springmvc.board.common.자유게시판페이지구성정보;
 import com.stone.springmvc.member.common.Member;
 import com.stone.springmvc.member.service.회원관리서비스;
+import com.stone.springmvc.product.common.매니저제품페이지구성정보;
 import com.stone.springmvc.product.common.제품;
 
 import com.stone.springmvc.product.common.제품페이지구성정보;
@@ -26,8 +27,8 @@ public class 제품컨트롤러 {
 	@Autowired
 	회원관리서비스 회원관리서비스Impl;
 
-	@RequestMapping("/products")
-	public ModelAndView 제품소개화면을준비하다(Integer pageNo, Integer category, HttpSession session) {
+	@GetMapping("/products")
+	public ModelAndView 고객용제품소개화면을준비하다(Integer pageNo, Integer category, HttpSession session) {
 
 		int requestPageNo = 1;
 		if (pageNo != null) {
@@ -58,7 +59,7 @@ public class 제품컨트롤러 {
 	}
 
 	@GetMapping("/product")
-	public ModelAndView 제품상세화면을준비하다(Integer barcode) {
+	public ModelAndView 고객용제품상세화면을준비하다(Integer barcode) {
 
 		// System.out.println("제품상세화면:" + barcode);
 		ModelAndView mav = new ModelAndView();
@@ -95,7 +96,7 @@ public class 제품컨트롤러 {
 	}
 
 	@GetMapping("/manage_product_add")
-	public String 제품등록화면을준비하다(HttpSession session) {
+	public String 매니저제품등록화면을준비하다(HttpSession session) {
 
 		if (isAdministrator(session)) {
 			return "product/manage_product_add";
@@ -104,7 +105,7 @@ public class 제품컨트롤러 {
 	}
 
 	@PostMapping("/manage_product_add")
-	public ModelAndView 제품을등록하다(제품 등록제품) {
+	public ModelAndView 매니저제품을등록하다(제품 등록제품) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -135,7 +136,7 @@ public class 제품컨트롤러 {
 	}
 
 	@GetMapping("/manage_products")
-	public ModelAndView 매니저제품화면을준비하다(Integer pageNo, String searchContent, HttpSession session) {
+	public ModelAndView 매니저판매제품화면을준비하다(Integer pageNo, String searchContent, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -161,7 +162,7 @@ public class 제품컨트롤러 {
 				검색타입 = 0;
 			}
 
-			제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 0, 검색타입, searchContent); // 0:판매중
+			매니저제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 0, 검색타입, searchContent); // 0:판매중
 
 			mav.setViewName("product/manage_products");
 			mav.addObject("pageInfo", pageInfo);
@@ -204,7 +205,7 @@ public class 제품컨트롤러 {
 				검색타입 = 0;
 			}
 
-			제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 1, 검색타입, searchContent); // 1:판매제외
+			매니저제품페이지구성정보 pageInfo = 제품관리서비스Impl.매니저제품리스트출력서비스(requestPageNo, 1, 검색타입, searchContent); // 1:판매제외
 
 			mav.setViewName("product/manage_products_ex");
 			mav.addObject("pageInfo", pageInfo);
@@ -257,6 +258,32 @@ public class 제품컨트롤러 {
 		}
 
 		return mav;
+	}
+	
+	
+	@GetMapping("/manage_product_delete")
+	public String 매니저제품삭제하다(int barcode, int isExcluded, HttpSession session) {
+
+
+		if (isAdministrator(session)) {
+			int success = 제품관리서비스Impl.제품삭제서비스(barcode);
+			if(success > 0) {
+				if(isExcluded == 0) {
+					return "redirect:/manage_products";
+				}
+				else if(isExcluded == 1){
+					return "redirect:/manage_products_ex";
+				}
+				else {
+					return "error/error";
+				}
+			}else {
+				return "error/manage_delete_fail";
+			}
+			
+		}
+		return "error/no_administrator";
+		
 	}
 
 	// 관리자인지 확인

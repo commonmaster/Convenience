@@ -20,4 +20,5 @@ public interface 제품DAO {
 	
 	int update제품(제품 수정할제품, boolean 이미지갱신);
 
+	int delete제품(int barcode);
 }

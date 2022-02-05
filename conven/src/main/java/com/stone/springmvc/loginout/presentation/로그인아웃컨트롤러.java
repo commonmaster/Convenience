@@ -102,10 +102,4 @@ public class 로그인아웃컨트롤러 {
 		return mav;
 	}
 
-	private boolean sessionExistCheck(HttpSession session, String name) {
-		if (session.getAttribute(name) == null || session.getAttribute(name).toString().isEmpty()) {
-			return false;
-		}
-		return true;
-	}
 }

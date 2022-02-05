@@ -35,6 +35,7 @@
 <tr><td><button class="big_btn" onclick="location.href='/manage_product_add'">물품등록</button></td></tr>
 <tr><td><button class="big_btn" onclick="location.href='/manage_products'">물품목록(진열)</button></td></tr>
 <tr><td><button class="big_btn" onclick="location.href='/manage_products_ex'">물품목록(제외)</button></td></tr>
+<tr><td><button class="big_btn" onclick="location.href='/main'">사이트메인</button></td></tr>
 </table>
 
 </body>

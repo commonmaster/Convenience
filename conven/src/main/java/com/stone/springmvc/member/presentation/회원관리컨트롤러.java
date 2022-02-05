@@ -1,4 +1,4 @@
-package com.stone.springmvc.member.presentation;
+	package com.stone.springmvc.member.presentation;
 
 import javax.servlet.http.HttpSession;
 
@@ -108,7 +108,7 @@ public class 회원관리컨트롤러 {
 	}
 
 	@PostMapping("pwd_change")
-	public ModelAndView 비밀번호변경(HttpSession session, String origin_password, String password) {
+	public ModelAndView 비밀번호변경하다(HttpSession session, String origin_password, String password) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -132,7 +132,7 @@ public class 회원관리컨트롤러 {
 	}
 	
 	@PostMapping("/withdraw")
-	public String 회원탈퇴(HttpSession session) {
+	public String 회원탈퇴하다(HttpSession session) {
 		
 		String id = (String) session.getAttribute("conven_session_id");
 		회원관리서비스Impl.회원탈퇴서비스(id);

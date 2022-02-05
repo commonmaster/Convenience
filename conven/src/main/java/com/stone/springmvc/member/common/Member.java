@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class Member {
 
-	int no;
 	String id;
 	String password;
 	String name;
 	String email;
 	int state;
 	Date regDate;
+	int no;
 	
 	public Member() {}	
 	

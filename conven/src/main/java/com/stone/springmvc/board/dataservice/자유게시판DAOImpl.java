@@ -133,7 +133,7 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 		PreparedStatement pstmt = null;
 		Date now = new Date();
 
-		String sql = "insert into board(title, authorId, contents, regDate, modifyDate) values(?,?,?,?,?)";
+		String sql = "insert into board(title, authorId, contents) values(?,?,?)";
 
 		try {
 
@@ -142,8 +142,7 @@ public class 자유게시판DAOImpl implements 자유게시판DAO {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getAuthorId());
 			pstmt.setString(3, board.getContents());
-			pstmt.setTimestamp(4, toTimestamp(now));
-			pstmt.setTimestamp(5, toTimestamp(now));
+		
 
 			int success = pstmt.executeUpdate();
 

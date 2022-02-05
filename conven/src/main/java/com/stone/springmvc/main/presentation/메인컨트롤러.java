@@ -31,12 +31,4 @@ public class 메인컨트롤러 {
 		return mav;
 	}
 
-	@RequestMapping("/home")
-	public ModelAndView 홈화면을준비하다() {
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("door/home");
-
-		return mav;
-	}
 }

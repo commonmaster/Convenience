@@ -45,9 +45,9 @@
 	
 	.standard_btn{
 	display:inline-block;
-	padding:15px;
+	padding:15px 0px;
 	border-radius:10px;	
-	width:200px;
+	width:180px;
 	font-weight:bold;
 	background:#F8E0F1;
 	border:0px;
@@ -90,7 +90,7 @@
 		<c:set var="pageNo" value="${empty param.pageNo ? '1':param.pageNo}"/>
 		<c:set var="searchContent" value="${empty param.searchContent ? null :param.searchContent}"/>
 		<button onclick="location.href='/manage_product_modify?barcode=${product.barcode}&pageNo=${pageNo}&searchContent=${searchContent}'" class="standard_btn">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
-		
+		<button onclick="deleteConfirm()" class="standard_btn">삭제</button>
 		
 			<a onclick="location.href='/manage_products?pageNo=${pageNo}&searchContent=${searchContent }'" class="standard_btn">판매목록</a>
 		
@@ -104,4 +104,12 @@
 
 </section>
 </body>
+<script>
+function deleteConfirm(){
+		
+		if(confirm("정말 삭제하시겠습니까?")){
+			location.href="/manage_product_delete?barcode=${product.barcode}&isExcluded=${product.isExcluded}";
+		}
+	}
+</script>
 </html>

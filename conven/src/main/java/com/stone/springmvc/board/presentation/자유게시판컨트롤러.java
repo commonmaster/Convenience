@@ -26,7 +26,7 @@ public class 자유게시판컨트롤러 {
 	@Autowired
 	회원관리서비스 회원관리서비스Impl;
 
-	@RequestMapping("/boards")
+	@GetMapping("/boards")
 	// 반드시 값이 오는 것이 아니므로 Integer로 받아 null을 받을 수 있게 함.
 	public ModelAndView 자유게시판화면을준비하다(Integer pageNo, Integer searchType, String searchContent, HttpSession session) {
 

@@ -45,9 +45,9 @@
 	
 	.standard_btn{
 	display:inline-block;
-	padding:15px;
+	padding:15px 0px;
 	border-radius:10px;	
-	width:200px;
+	width:180px;
 	font-weight:bold;
 	background:#F8E0F1;
 	border:0px;

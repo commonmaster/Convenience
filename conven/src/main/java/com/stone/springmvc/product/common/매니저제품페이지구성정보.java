@@ -1,8 +1,6 @@
-package com.stone.springmvc.manage.common;
+package com.stone.springmvc.product.common;
 
 import java.util.List;
-
-import com.stone.springmvc.product.common.제품;
 
 public class 매니저제품페이지구성정보 {
 
@@ -12,9 +10,10 @@ public class 매니저제품페이지구성정보 {
 	private int totalPageCount; // 총 페이지의 갯수 = 출력할 수 있는 마지막 페이지
 	private int startPage; 
 	private int endPage;
-	private final int SHOW_PAGE_COUNT = 5; // 보여줄 페이지 갯수
-	private final int SHOW_RECORD_COUNT = 5; //보여줄 레코드수(3의 배수)(최대 9)
+	private int SHOW_PAGE_COUNT = 5; // 보여줄 페이지 갯수
+	private int SHOW_RECORD_COUNT = 6; //보여줄 레코드수(3의 배수)(최대 9)
 	
+
 	public 매니저제품페이지구성정보() {	}
 	
 	public 매니저제품페이지구성정보(int totalRecordCount, int currentPage, List<제품> contents) {
@@ -106,7 +105,14 @@ public class 매니저제품페이지구성정보 {
 	
 	public boolean hasRecords() {
 		return totalRecordCount > 0;
+	}	
+
+	public void setSHOW_PAGE_COUNT(int sHOW_PAGE_COUNT) {
+		SHOW_PAGE_COUNT = sHOW_PAGE_COUNT;
 	}
-	
+
+	public void setSHOW_RECORD_COUNT(int sHOW_RECORD_COUNT) {
+		SHOW_RECORD_COUNT = sHOW_RECORD_COUNT;
+	}
 	
 }
