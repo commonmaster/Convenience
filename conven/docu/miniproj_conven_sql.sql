@@ -29,7 +29,8 @@ contents text,
 regDate datetime DEFAULT current_timestamp,
 modifyDate datetime DEFAULT current_timestamp,
 readCount int not null default 0,
-isDeleted int default 0
+isDeleted int default 0,
+foreign key(authorId) references member(id)
 );
 
 create table product
@@ -43,3 +44,6 @@ productImg longblob,
 intro varchar(255),
 isExcluded int default 0
 );
+
+select * from product;
+select * from member;
