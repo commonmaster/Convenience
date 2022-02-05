@@ -65,7 +65,7 @@
 <section>
 <table>
 <tr><th colspan="5"><img id="logo_img" src="/img/logo_ju_info.jpg" width="450px"></th></tr>
-<tr><th colspan="2" rowspan="4"><img src="/productImg/${product.barcode }" width="230" height="230" id="productImg"></th><th class="tit" width="60px">바코드</th><td width="180.4px" class="tit_contents">${product.barcode }</td><td rowspan="5"><textarea rows="19" cols="50" name="intro" id="intro" placeholder="제품 소개 없음" readonly="readonly"></textarea></tr>
+<tr><th colspan="2" rowspan="4"><img src="/productImg/${product.barcode }" width="230" height="230" id="productImg"></th><th class="tit" width="60px">바코드</th><td width="180.4px" class="tit_contents">${product.barcode }</td><td rowspan="5"><textarea rows="19" cols="50" name="intro" id="intro" placeholder="제품 소개 없음" readonly="readonly">${product.intro }</textarea></tr>
 <tr><th class="tit">제품명</th><td class="tit_contents">${product.name }</td></tr>
 <tr><th class="tit">종류</th><td class="tit_contents">
 	<c:if test="${product.type == 1}">과자</c:if>

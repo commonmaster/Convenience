@@ -46,7 +46,13 @@
   		<td colspan="2" id="product_detail_img_td"><img src="/productImg/${product.barcode}" id="product_detail_img"></td><td width="300px" id="product_detail_intro_td">${product.intro}</td>
 	</tr>
 	<tr><td id="product_detail_name_t_td">제품명</td><td id="product_detail_name_td" 	colspan="2">${product.name }</td></tr>
-	<tr><td width=60px;>종&nbsp;&nbsp;&nbsp;류</td><td colspan="2">${product.type }</td></tr>
+	<tr><td width=60px;>종&nbsp;&nbsp;&nbsp;류</td><td colspan="2">
+	
+		<c:if test="${product.type == 1}">과자</c:if>
+		<c:if test="${product.type == 2}">음료수</c:if>
+		<c:if test="${product.type == 3}">과자</c:if>
+		</td>
+	</tr>
 	<tr><td>가&nbsp;&nbsp;&nbsp;격 </td><td colspan="2">${product.price }</td></tr>
 	<tr><td>제조사</td><td colspan="2">${product.provider }</td></tr>
 	<tr><td>바코드</td><td colspan="2">${product.barcode }</td></tr>
