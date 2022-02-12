@@ -51,4 +51,10 @@ caption {
 	font-weight:bold;
 	background:#F8E0F1;
 	border:0px;
+	border:1px solid #F8E0F1;
+	cursor:pointer;
+}
+
+.board_btn:hover{
+	background:#F5A9F2;
 }

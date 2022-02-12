@@ -63,6 +63,11 @@
  		color:white;
  		font-weight:bold;
  		border-radius:5px;
+ 		border: 1px solid purple;
+ 	}
+ 	
+ 	#duple_btn:hover, #submit_btn:hover{
+ 		background:#B404AE;
  	}
  	
  	.message{

@@ -55,6 +55,9 @@
 	margin: 0px 10px;
 	}
 	
+	.standard_btn:hover{
+	background:#F5A9F2;
+}
 }
 	
 	

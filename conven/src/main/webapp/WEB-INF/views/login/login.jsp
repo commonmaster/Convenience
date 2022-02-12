@@ -41,8 +41,13 @@
 		border-radius:3px;
 		font-size:1.5em;
 		padding:10px 5px;
+		border:1px solid purple;
 		
 		}
+		
+	#button:hover{
+		background:#B404AE;
+	}	
 	
 	.button_line {padding:0px 9px;}
 
@@ -60,7 +65,7 @@
   <form id="log" action="/login" method="post" onsubmit="return submitCheck()" target="_parent">
 	<table border="0">
 		<tr>
-			<td><input type="text" id="id" name="id" placeholder="아이디" maxlength="14"></td>
+			<td><input type="text" id="id" name="id" placeholder="아이디" maxlength="14" autocomplete="off"></td>
 			<td rowspan="2" class="button_line"><input type="submit" value="로 그 인" id="button"></td>
 		</tr>
 		<tr>

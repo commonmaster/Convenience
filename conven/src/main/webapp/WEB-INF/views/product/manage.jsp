@@ -26,6 +26,11 @@
 		height:100px;
 		font-size:2em;
 		border-radius:15px;
+		cursor:pointer;
+	}
+	
+	.big_btn:hover{
+		background:#B404AE;
 	}
 </style>
 </head>

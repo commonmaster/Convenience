@@ -104,7 +104,7 @@ public class 회원관리컨트롤러 {
 	@GetMapping("/pwd_change")
 	public String 비밀번호변경화면을준비하다() {
 
-		return "password_change";
+		return "member/password_change";
 	}
 
 	@PostMapping("pwd_change")

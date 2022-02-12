@@ -49,6 +49,10 @@ td {
 	border: 0;
 }
 
+#duple_btn:hover, #use_btn:hover{
+	background:#B404AE;
+}
+
 .message {
 	color: red;
 	font-size: 0.8em;

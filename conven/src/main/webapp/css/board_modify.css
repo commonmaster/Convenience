@@ -48,7 +48,13 @@ thead .board_head_line{
 	padding:7.5px 15px;
 	border-radius:10px;
 	margin-left:10px;
-	background:#F8E0F1;
 	font-weight:bold;
+	background:#F8E0F1;
 	border:0px;
+	border:1px solid #F8E0F1;
+	cursor:pointer;
+}
+
+.board_btn:hover{
+	background:#F5A9F2;
 }

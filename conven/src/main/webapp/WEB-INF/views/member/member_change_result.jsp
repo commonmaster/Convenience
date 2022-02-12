@@ -22,7 +22,11 @@
  		font-weight:bold;
  		background:purple;
  		border:0;
- 		
+ 		border:1px solid purple;
+ 	}
+ 	
+ 	#ok_btn:hover{
+ 		background:#B404AE;
  	}
 </style>
 </head>

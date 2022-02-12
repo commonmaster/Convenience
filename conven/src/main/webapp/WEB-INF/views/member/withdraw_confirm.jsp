@@ -16,6 +16,11 @@
 		color:white;
 		font-weight:bold;
 		background:purple;
+		border:1px solid purple;
+	}
+	
+	#ok_btn:hover{
+		background:#B404AE;
 	}
 	
 	td{

@@ -25,6 +25,11 @@ button {
 	font-weight: bold;
 	background: purple;
 	border: 0;
+	border:1px solid purple;
+}
+
+button:hover{
+	background:#B404AE;
 }
 </style>
 </head>

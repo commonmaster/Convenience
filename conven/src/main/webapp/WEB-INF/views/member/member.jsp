@@ -25,16 +25,19 @@
  		float:right;
  	}
  	
- 	.board_btn{
+ 	.main_btn{
 	padding:7.5px 15px;
 	border-radius:10px;
 	margin-left:10px;
 	font-weight:bold;
 	background:#F8E0F1;
 	border:0px;
-	
+	border:1px solid #F8E0F1;
 	}
  	
+ 	.main_btn:hover{
+ 		background:#F5A9F2
+ 	}
  	#caption_line{
  		border-top: 1px solid purple;
  	}
@@ -75,6 +78,10 @@
  		border-radius:5px;
  	}
  	
+ 	#pwd_change_btn:hover, #submit_btn:hover{
+ 		background:#B404AE;
+ 	}
+ 	
  	.message{
  		color:red;
  		font-size:0.8em;
@@ -87,7 +94,7 @@
   
   <form action="/member" method="post" onsubmit="return submitCheck()">
 	<table class="info_table">
-		<caption>회원정보<span class="float_right"><button class="board_btn" onclick="location.href='/main'">메인</button></span></caption>
+		<caption>회원정보<span class="float_right"><button class="main_btn" onclick="location.href='/main'">메인</button></span></caption>
 		<tr><td id="caption_line" width="500px"></td></tr>
 	</table>	
 	

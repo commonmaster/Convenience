@@ -29,6 +29,7 @@
 		color:white;
 		padding:10px;
 		border-radius:10px;		
+		cursor:pointer;
 	}
 	
 	.tit{
@@ -43,11 +44,7 @@
 		width:380px;
 		padding:5px;
 	}
-	
-	button{
-		padding:5px;
-	}
-	
+		
 	#hasNoRecord{
 		color:blue;
 	}
@@ -90,6 +87,11 @@
 		background: purple;
 		color: white;
 		font-weight: bold;
+		cursor:pointer;
+	}
+	
+	#back_main:hover, #search_btn:hover{
+		background:#B404AE;
 	}
 	
 		
